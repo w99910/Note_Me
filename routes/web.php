@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome_page');
 });
+Route::post('/note_me_login',[App\Http\Controllers\General::class,'SignIn'])->name('login');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+Route::view('test','Test');
+Route::view('wel','welcome_page');
+Route::post('/store',function(\Illuminate\Http\Request $req){
+   return $req;
+});
+
+require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

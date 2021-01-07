@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="09965a13-2bda-4aad-8146-bd0bfdba9769" name="Default Changelist" comment="" />
+    <list default="true" id="09965a13-2bda-4aad-8146-bd0bfdba9769" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Note_Me.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Note_Me.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/blade.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/blade.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -15,8 +32,20 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="composer.json" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -126,9 +155,15 @@
       <path value="$PROJECT_DIR$/vendor/laravel/framework" />
       <path value="$PROJECT_DIR$/vendor/opis/closure" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/onecentlin/laravel-adminer" />
+      <path value="$PROJECT_DIR$/vendor/livewire/livewire" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/laravolt/avatar" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lxq6x0OfcC1cgM8OB4KbMQ5u10" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -137,9 +172,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\Note_Me\public\images" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -155,11 +196,68 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608548919071</updated>
-      <workItem from="1608548924483" duration="747000" />
+      <workItem from="1608548924483" duration="1168000" />
+      <workItem from="1608563961470" duration="1484000" />
+      <workItem from="1608629274890" duration="2775000" />
+      <workItem from="1608703238546" duration="162000" />
+      <workItem from="1608713611608" duration="1278000" />
+      <workItem from="1608716917299" duration="1240000" />
+      <workItem from="1608718314434" duration="11659000" />
+      <workItem from="1608790888305" duration="300000" />
+      <workItem from="1608791216148" duration="5902000" />
+      <workItem from="1608805653075" duration="869000" />
+      <workItem from="1608808892504" duration="3261000" />
+      <workItem from="1608867947329" duration="1261000" />
+      <workItem from="1608898542364" duration="5470000" />
+      <workItem from="1608905021542" duration="1168000" />
+      <workItem from="1608907134595" duration="748000" />
+      <workItem from="1608959104472" duration="3194000" />
+      <workItem from="1608970125417" duration="2058000" />
+      <workItem from="1608975542704" duration="3919000" />
+      <workItem from="1608984778926" duration="950000" />
+      <workItem from="1609053332095" duration="4934000" />
+      <workItem from="1609065038971" duration="3485000" />
+      <workItem from="1609081200784" duration="5724000" />
+      <workItem from="1609135254295" duration="1603000" />
+      <workItem from="1609225767742" duration="1234000" />
+      <workItem from="1609248401349" duration="8482000" />
+      <workItem from="1609261517708" duration="1140000" />
+      <workItem from="1609300949429" duration="4051000" />
+      <workItem from="1609390907370" duration="3246000" />
+      <workItem from="1609394728826" duration="6519000" />
+      <workItem from="1609477707618" duration="660000" />
+      <workItem from="1609479047581" duration="618000" />
+      <workItem from="1609487663757" duration="858000" />
+      <workItem from="1609497959808" duration="400000" />
+      <workItem from="1609498411387" duration="130000" />
+      <workItem from="1609506923414" duration="530000" />
+      <workItem from="1609507853673" duration="6912000" />
+      <workItem from="1609564191327" duration="5708000" />
+      <workItem from="1609575869238" duration="1733000" />
+      <workItem from="1609592028956" duration="3732000" />
+      <workItem from="1609598726920" duration="1548000" />
+      <workItem from="1609684806017" duration="677000" />
+      <workItem from="1609844770209" duration="4238000" />
+      <workItem from="1609851405325" duration="1394000" />
+      <workItem from="1609911118710" duration="8464000" />
+      <workItem from="1609929837148" duration="9331000" />
+      <workItem from="1609993834207" duration="6309000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
