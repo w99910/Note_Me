@@ -17,7 +17,7 @@ class CreateNotesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
-            $table->string('content')->nullable();
+            $table->json('content')->nullable();
             $table->foreignId('project_id')->nullable()->constrained();
             $table->boolean('finished')->default(false);
             $table->timestamps();

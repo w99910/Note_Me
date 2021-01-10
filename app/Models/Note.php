@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
+   protected $guarded=[];
     use HasFactory;
+    protected $casts=[
+      'content'=>'array',
+    ];
 }

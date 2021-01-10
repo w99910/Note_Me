@@ -36,12 +36,6 @@
                     <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;">Login</button>
 
                 </div>
-<!--                    <div class="w-full flex flex-col items-center justify-end">-->
-<!--                        &lt;!&ndash;                    <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 self-end" @click="Login" style="background: #658795;">Login</button>&ndash;&gt;-->
-<!--                          <div class="flex"><button @click="incrementX(true)">+</button>x<button @click="incrementX(false)">-</button></div>-->
-<!--                          <div class="flex"><button @click="incrementY(true)">+</button>y<button @click="incrementY(false)">-</button></div>-->
-<!--                          <div class="flex"><button @click="incrementZ(true)">+</button>z<button @click="incrementZ(false)">-</button></div>-->
-<!--                    </div>-->
                     </form>
                 </div>
 
@@ -49,31 +43,39 @@
         </div>
         <div class="register-form transform translate-y-full fixed w-full right-0 h-5/6 bottom-0 z-10 rounded-t-2xl p-5 flex flex-col sm:flex-row items-center justify-center"  >
             <div class="w-full h-full flex flex-col sm:flex-row justify-between items-center justify-center p-4 sm:p-10 rounded-2xl relative" style="background: #6A5B5B;">
-                <div class="absolute top-0 right-0 bg-white rounded-bl-full"><button class="px-3 focus-within:outline-none" @click="showLogin">-</button></div>
+                <div class="absolute top-0 right-0 bg-white rounded-bl-full"><button class="px-3 focus-within:outline-none" @click="showSignUp">-</button></div>
                 <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white">
                     <span class="text-xl font-bold">Let's Rock and Roll :D</span>
-                    <form action="/note_me_login" method="post" class="w-full h-full">
+                    <form action="/note_me_register" method="post" class="w-full h-full">
                         <input type="hidden" name="_token" :value="csrf">
                         <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
+                            <div class="flex justify-start items-center w-full"><label for="name" class="w-3/12 flex">Name:</label>
+                                <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
+                                    <input id="name" name="name" class="border-none focus:ring-0 text-gray-800 rounded-full py-1 px-2 w-full" type="text" v-model="name">
+                                </div>
+                                </div>
+                            <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="nameError!==null"><span>{{nameError}}</span></span>
+                        </div>
+                        <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
                             <div class="flex justify-start items-center w-full"><label for="email1" class="w-3/12 flex">Email:</label>
-                                <input id="email1" name="email" class="text-gray-800 ml-3 focus:outline-none rounded-full py-1 px-2 w-9/12" type="text" v-model="email" required>
-                            </div>
+                                <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
+                                <input id="email1" name="email1" class="text-gray-800 rounded-full focus:ring-0 border-none py-1 px-2 w-full" type="text" v-model="email1" required>
+                                </div>
+                                </div>
                             <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidMail"><span>Please enter valid email.</span></span>
                         </div>
                         <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
                             <div class="flex justify-start items-center w-full"><label for="password1" class="w-3/12 flex">Password:</label>
-                                <input id="password1" name="password" class="text-gray-800 ml-3 focus:outline-none rounded-full py-1 px-2 w-9/12" type="password" v-model="password" required>
+                                <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
+                                <input id="password1" name="password1" class="text-gray-800 rounded-full focus:ring-0 border-none py-1 px-2 w-full" type="password" v-model="password1" required>
+                                <i class="fas fa-eye" @click="togglePass"></i>
+                                </div>
                             </div>
                             <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidPassword" ><span>Password Field is required.</span></span>
 
                         </div>
-                        <div class=" relative flex items-center justify-start w-full  h-1/4">
-                            <label for="checkbox1" class="flex">Remember Me?</label>
-                            <input id="checkbox1" name="remember" class="ml-3 focus:outline-none" type="checkbox" v-model="remember">
-
-                        </div>
                         <div class="w-full flex items-center justify-end mt-1 sm:mt-4">
-                            <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;">Login</button>
+                            <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;">Sign Up</button>
 
                         </div>
                     </form>
@@ -95,8 +97,8 @@
             </div>
         </div>
         <div class="flex flex-col sm:flex-row justify-evenly w-full sm:w-8/12 items-center h-full">
-            <button class="focus:outline-none text-center text-dark-red border-none w-full sm:w-auto bg-white rounded-full px-4 sm:px-14 py-3" @click="showLogin()">Login</button>
-            <button class=" focus:outline-none text-white bg-dark-red border-none w-full sm:w-auto rounded-full px-4 sm:px-14 py-3" @click="showSignUp()">Sign Up</button>
+            <button class="focus:outline-none text-center text-dark-red border-none w-full sm:w-4/12   bg-white rounded-full py-3" @click="showLogin()">Login</button>
+            <button class=" focus:outline-none text-white bg-dark-red border-none w-full sm:w-4/12 mt-2 sm:mt-0  rounded-full py-3" @click="showSignUp()">Sign Up</button>
         </div>
     </div>
 </template>
@@ -104,7 +106,7 @@
 <script>
  import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
  import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader';
-let renderer,scene,camera,animations=[],character,hemi_light,mixer,clock,
+let renderer,container,scene,camera,animations=[],character,hemi_light,mixer,clock,
     angry_action, no_action,thoughtful_action,clap_action,head_action,point_action,whatever_action,wave_action,current_action;
 export default {
     props:['csrf'],
@@ -112,9 +114,13 @@ export default {
     name: "guest_form",
     data(){
         return {
+            name:'',
+            nameError:null,
             isOpen:false,
             email:'',
             password:'',
+            email1:'',
+            password1:'',
             isValidMail:true,
             remember:false,
             isValidPassword:true,
@@ -128,6 +134,14 @@ export default {
       }
     },
     watch:{
+        name() {
+            if(this.HasString(this.name)){
+                this.nameError='Name field is required.'
+            }
+            else{
+                this.nameError=null;
+            }
+        },
       email(){
           if(this.enableAni) {
               let think = mixer.clipAction(point_action);
@@ -169,37 +183,22 @@ export default {
     },
 
     methods:{
-        incrementX(increment){
-            if(increment===true) {
-                character.position.x += 1;
-            }else{
-                character.position.x -=1;
-            }
-            console.log(character.position)
-
-        }
-        ,incrementY(increment){
-            if(increment) {
-                character.position.y += 1;
-            }
-            else{
-                character.position.y-=1;
-            }
-            console.log(character.position)
+        HasString(value){
+          return value.trim().length===0;
         },
-        incrementZ(increment){
-            if(increment) {
-                character.position.z += 1;
-            }
-            else{
-                character.position.z-=1;
-            }
-            console.log(character.position)
+        togglePass(){
+            let input=document.getElementById('password1');
+            if(input.type==='password')
+          {
+              input.type='text';
+          }
+          else{
+              input.type='password';
+          }
         },
-
         Login(){
-            console.log(this.ValidateForms())
-            if(this.ValidateForms()) {
+
+            if(this.ValidateForms(this.email,this.password)) {
 
                 axios.post('/note_me_login', {
                     email: this.email,
@@ -210,8 +209,8 @@ export default {
                 });
             }
         },
-        ValidateForms(){
-          return this.isValidEmail()&&this.password.trim().length!==0;
+        ValidateForms(email,password){
+          return this.isValidEmail(email)&&password.trim().length!==0;
         },
         showLogin(){
           this.isOpen=!this.isOpen;
@@ -247,9 +246,20 @@ export default {
                 })
             }
         },
-        isValidEmail(){
+        SignUp(){
+            if(this.ValidateForms(this.email1,this.password1)) {
+
+                axios.post('/note_me_register', {
+                    email: this.email1,
+                    password: this.password1,
+                }).then((res) => {
+                    console.log(res)
+                });
+            }
+        },
+        isValidEmail(email){
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(this.email.toLowerCase());
+            return re.test(email.toLowerCase());
         },
         _Req(){
             let dt=clock.getDelta();
@@ -258,7 +268,6 @@ export default {
             if(mixer!==undefined){mixer.update(dt)}
         },
         _Resize(){
-            let container=document.querySelector('.animation_me').getBoundingClientRect();
 
             camera.aspect = container.width/container.height;
             camera.updateProjectionMatrix();
@@ -276,7 +285,7 @@ export default {
                 el._Resize();
             }
         })
-        let container=document.querySelector('.animation_me').getBoundingClientRect();
+        container=document.querySelector('.animation_me').getBoundingClientRect();
         scene=new THREE.Scene();
       camera=new THREE.PerspectiveCamera(45,container.width/container.height,0.01,1000);
 
