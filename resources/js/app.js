@@ -27,6 +27,7 @@ Vue.component('Note', require('./components/Note.vue').default);
 Vue.component('guest_form', require('./components/Guest_Form.vue').default);
 Vue.component('toast', require('./components/toast.vue').default);
 Vue.component('note-component',require('./components/Note_Component.vue').default);
+Vue.component('calendar',require('./components/Calendar.vue').default);
 import EditorJS from '@editorjs/editorjs';
 import Undo from 'editorjs-undo';
 window.Marker = require('@editorjs/marker');
@@ -41,7 +42,12 @@ window.CodeTool = require('@editorjs/code');
 window.Underline=require('@editorjs/underline');
 window.EditorJS=EditorJS;
 window.Undo=Undo;
+import Calendar from 'v-calendar/lib/components/calendar.umd'
+import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 
+// Register components in your 'main.js'
+Vue.component('v-calendar', Calendar)
+Vue.component('v-date-picker', DatePicker)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

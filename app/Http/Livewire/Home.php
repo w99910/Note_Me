@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NoteController;
 use Livewire\Component;
 use App\Models\Note;
 class Home extends Component
@@ -13,5 +15,9 @@ class Home extends Component
     }
     public function mount(){
             $this->notes=Auth()->user()->notes;
+    }
+    public function viewNote($id){
+
+        return redirect()->to('/note/'.$id);
     }
 }

@@ -16,13 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome_page');
 })->middleware('guest');
-Route::view('/create_note','create_note')->middleware('auth')->name('create_note');
+Route::get('/create_note',[App\Http\Controllers\NoteController::class,'CreateNote'])->name('create_note');
 Route::post('/note_me_login',[App\Http\Controllers\General::class,'SignIn'])->name('login');
 Route::post('/note_me_register',[App\Http\Controllers\General::class,'SignUp'])->name('signUp');
-
+Route::get('/note/{id}',[App\Http\Controllers\NoteController::class,'ViewNote']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+Route::view('/calendar','calendar')->middleware('auth')->name('calendar');
 Route::view('test','Test');
 Route::view('wel','welcome_page');
 Route::post('/create_note',[\App\Http\Controllers\NoteController::class,'create']);
@@ -42,7 +43,12 @@ Route::get('/note_show',function (){
                                        //          +"style": "ordered"
                                        //      +"items": array:2 [▶] }
                  foreach ($decode as $inside)  {
-           foreach($inside->data as $data)
+                     echo $inside->type;
+                     switch ($inside->type){
+                         case 'header': echo 'header';break;
+                         case 'list':echo 'list';break;
+                     }
+                     foreach($inside->data as $data)
            {
 
                 if(is_array($data))

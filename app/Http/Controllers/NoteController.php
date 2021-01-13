@@ -16,12 +16,17 @@ class NoteController extends Controller
         $validator=$this->validate($req,['title'=>'required|string']);
 
         try {
-//            $editor = new EditorJS( $req->blocks, $req->config );
-//            return $editor;
-//            $note = Note::create(['user_id' => Auth()->id(), 'title' => $req->title, 'content' => $req->blocks]);
+            $note = Note::updateOrCreate(['user_id' => Auth()->id(), 'id' => $req->id],[ 'title' => $req->title,'content' => $req->blocks,'color'=>$req->color]);
             return ['route'=>route('dashboard')];
         }catch(\EditorJSException $e){
           return $e;
         }
+    }
+    public function ViewNote($id){
+        $note=Note::find($id);
+        return view('note',compact('note'));
+    }
+    public function CreateNote(){
+        return view('note')->with(['note'=>'']);
     }
 }

@@ -12,4 +12,8 @@ class Note extends Model
     protected $casts=[
       'content'=>'array',
     ];
+    public function schedules(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Note_Scheduler::class);
+    }
 }

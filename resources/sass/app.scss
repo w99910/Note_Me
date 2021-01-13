@@ -26,6 +26,9 @@
         -webkit-backdrop-filter: blur( 4px );
         border-radius: 10px;
     }
+    .blend-multiply{
+     mix-blend-mode: multiply;
+    }
     .neumorphism{
         box-shadow:  20px -20px 40spx #1b1818,
         -20px 20px 40px #2f2c2c;
