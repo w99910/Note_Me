@@ -9,7 +9,7 @@
             <img src="{{asset('/images/note_me_04.png')}}" alt="note_me" class="w-full">
         </div>
         @error('email')
-        <toast message="{{$message}}" time="1"></toast>
+        <toast message="{{$message}}" time=".5" start="true"></toast>
         @enderror
 <Guest_Form csrf="{{csrf_token()}}"></Guest_Form>
     </div>

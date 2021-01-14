@@ -17,13 +17,15 @@ class General extends Controller
                ]);
 
                if($validator) {
-                   $user = User::where('email', $req['email'])->first();
-                   if ($user) {
+
+
+                   if (Auth::attempt(['email'=>$req->email,'password'=>$req->password])) {
+                       $user = User::where('email', $req->email)->first();
                        return Hash::check($req['password'], $user->password) ? $this->Login($user, $req) : redirect()->back()->withErrors(['email' => 'Invalid Credentials']);
                    }
                }
 
-        return redirect()->back()->withErrors('email','Invalid Request,Please Try again');
+        return redirect()->back()->withErrors(['email'=>'Incorrect Email or Password.Please Try again']);
     }
     public function Login($user,$req){
         $req->session()->regenerate();
@@ -31,12 +33,12 @@ class General extends Controller
         return redirect()->route('dashboard');
     }
     public function SignUp(Request $req){
-        $validator=\Validator::make($req->only('email','password'),[
+        $validator=\Validator::make($req->all(),[
             'name'=>'string|required',
-            'email'=>'email|required|unique',
-            'password'=>'required',
+            'email1'=>'unique:users,email|email|required',
+            'password1'=>'required',
         ]);
-        if($validator){
+        if(!$validator->fails()){
          $user=User::create(['name'=>$req->name,'email'=>$req->email1,'password'=>Hash::make($req->password1)]);
          Auth::Login($user);
          return redirect()->route('dashboard');

@@ -15,8 +15,8 @@ class CreateNoteSchedulersTable extends Migration
     {
         Schema::create('note__schedulers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('note_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('note_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

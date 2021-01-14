@@ -33,7 +33,7 @@
 
                 </div>
                 <div class="w-full flex items-center justify-end mt-1 sm:mt-4">
-                    <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;">Login</button>
+                    <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;" :disabled="!isDisable">Login</button>
 
                 </div>
                     </form>
@@ -130,7 +130,7 @@ export default {
     },
     computed:{
       isDisable(){
-             return this.ValidateForms();
+             return this.ValidateForms(this.email,this.password);
       }
     },
     watch:{
@@ -165,7 +165,7 @@ export default {
                 el.enableAni=true;
               })
           }
-          if(this.isValidEmail()){
+          if(this.isValidEmail(this.email)){
               this.isValidMail=true;
           }
           else{

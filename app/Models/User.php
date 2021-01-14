@@ -45,7 +45,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class);
     }
-    public function schedules(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function schedules()
     {
         return $this->hasMany(Note_Scheduler::class);
     }

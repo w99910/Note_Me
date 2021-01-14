@@ -1,13 +1,42 @@
 <template>
-    <div class="w-full h-full flex flex-col rounded-2xl p-4" v-bind:style="{backgroundColor:custom_color}">
+ <div class="w-full h-full flex flex-col rounded-2xl p-4" v-bind:style="{backgroundColor:custom_color}">
         <div class="w-full flex items-center justify-between">
             <label class="w-full">
                 <input v-model.lazy="title" placeholder="Enter Title" class="w-full focus:outline-none border-b-2 px-3 py-2">
             </label>
             <div class="p-2 bg-gray-400 ml-2"><div class="color-picker"></div></div>
-            <div class="w-1/12 flex items-center justify-center mx-2 text-white"><button class="px-3 py-1 bg-green-500" @click="save()">Create</button></div>
+            <div class="w-1/12 flex items-center justify-center mx-2 text-white"><button class="px-3 py-1 bg-green-500" @click="save()"><span v-text="note!==''?'Save':'Create'"></span></button></div>
         </div>
-        <div class="w-full p-2 overflow-auto" id="editorjs"></div>
+     <v-date-picker v-model="selected.date" updateValue>
+         <template #default="{ inputValue, togglePopover, hidePopover }">
+             <div class="flex flex-wrap">
+                 <button
+                     v-for="(date, i) in dates"
+                     :key="date.date.getTime()"
+                     class="flex items-center bg-indigo-200 hover:bg-indigo-400 text-sm text-indigo-600 font-semibold h-8 px-2 m-1 rounded-lg border-2 border-transparent focus:border-indigo-600 focus:outline-none"
+                     @click.prevent="updateValue(date);dateSelected($event, date, togglePopover);"
+                     ref="button"
+                     v-show="dates.length!==null"
+                 >
+                     {{ date.date.toLocaleDateString() }}
+                     <svg
+                         class="w-4 h-4 text-gray-600 hover:text-indigo-600 ml-1 -mr-1"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         @click.stop="removeDate(date, hidePopover)"
+                     >
+                         <path d="M6 18L18 6M6 6l12 12"></path>
+                     </svg>
+                 </button>
+             </div>
+         </template>
+     </v-date-picker>
+     <button class="text-sm text-indigo-600 font-semibold hover:text-indigo-500 px-2 h-8 focus:outline-none"
+         @click.stop="addDate" v-show="note!==''">
+         + Add Date
+     </button>
+     <div class="w-full p-2 overflow-auto" id="editorjs"></div>
 <!--        <input type="hidden" value="{{csrf}}" name="_token" id="csrf_token">-->
 </div>
 </template>
@@ -32,6 +61,9 @@ name: "Note_Component",
     props:['errors','note','csrf','readonly'],
     data(){
       return{
+          dates: [
+          ],
+          selected: {},
           title:this.note!==''?JSON.parse(this.note).title:'',
           content:'',
           custom_color:this.note!==''?JSON.parse(this.note).color:'#ffffff',
@@ -40,27 +72,75 @@ name: "Note_Component",
     watch:{
       errors(){
           console.log(this.errors)
-      }
+      },
     },
     computed:{
 
     },
-    methods:{
+    methods: {
+        updateValue(value){
+          console.log(value);
+            },
+        addDate() {
+            this.dates.push({
+                date: new Date(),
+            });
+            this.$nextTick(() => {
+                const btn = this.$refs.button[this.$refs.button.length - 1];
+                btn.click();
+            });
+                },
+        removeDate(date, hide) {
+            this.dates = this.dates.filter((d) => d !== date);
+            hide();
+        },
+        dateSelected(e, date, toggle) {
+            this.selected = date;
+            toggle({ref: e.target});
 
-      save(){
-        editor.save().then((output)=>
-        {
-           console.log(axios);
-            axios.post('http://127.0.0.1:8000/create_note',{id:this.note!==''?JSON.parse(this.note).id:0,_token:this.csrf,title:this.title,blocks:JSON.stringify(output.blocks),color:this.custom_color}).then((res)=>{
-                console.log(res)
-                if(res.status===200){
-                             window.location=res.data.route;
-               }
+        },
+        changeCarbonToJsDate(a){
+            let date=a.split("T")[0].split('-')
+            return new Date(date[0],date[1]-1,date[2]);
+        },
+        changeJsToCarbon(a){
+            let day=a.getDate();
+            let month=a.getMonth();
+            let year=a.getFullYear();
+            return `${year}-${month+1}-${day}`;
+        },
+        save() {
+            editor.save().then((output) => {
+                console.log(axios);
+                console.log(this.dates)
+                let carbon=[];
+                for(let date of this.dates){
+                    carbon.push(this.changeJsToCarbon(date.date));
+                }
+                console.log(carbon);
+                axios.post('http://127.0.0.1:8000/create_note', {
+                    id: this.note !== '' ? JSON.parse(this.note).id : 0,
+                    _token: this.csrf,
+                    title: this.title,
+                    blocks: JSON.stringify(output.blocks),
+                    color: this.custom_color,
+                    schedules:carbon,
+                }).then((res) => {
+                    console.log(res)
+                    if (res.status === 200) {
+                        window.location = res.data.route;
+                    }
+                })
             })
-        })
-      },
+        },
     },
     mounted(){
+    if(this.note!==''){
+        for(let schedule of JSON.parse(this.note).schedules){
+            console.log(schedule)
+              this.dates.push({date:this.changeCarbonToJsDate(schedule.created_at)});
+        }
+    }
         pickr = Pickr.create({
             el: '.color-picker',
             theme: 'classic', // or 'monolith', or 'nano'
@@ -81,7 +161,6 @@ name: "Note_Component",
                 'rgba(255, 235, 59, 0.95)',
                 'rgba(255, 193, 7, 1)'
             ],
-
             components: {
 
                 // Main components
@@ -103,9 +182,7 @@ name: "Note_Component",
             }
         });
 
-        pickr.on('show', (color, instance) => {
-            this.custom_color= color.toHEXA().toString()
-            }).on('change', (color, source, instance) => {
+        pickr.on('change', (color, source, instance) => {
             console.log('Event: "change"', color.toHEXA().toString());
             this.custom_color= color.toHEXA().toString();
         });
