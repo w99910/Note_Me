@@ -40,6 +40,7 @@ window.AttachesTool = require('@editorjs/attaches');
 window.Table = require('@editorjs/table');
 window.CodeTool = require('@editorjs/code');
 window.Underline=require('@editorjs/underline');
+window.Hyperlink = require('editorjs-hyperlink');
 window.EditorJS=EditorJS;
 window.Undo=Undo;
 import Calendar from 'v-calendar/lib/components/calendar.umd'

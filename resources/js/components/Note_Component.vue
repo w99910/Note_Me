@@ -45,6 +45,9 @@
 import Header from '@editorjs/header';
 import '@simonwep/pickr/dist/themes/classic.min.css';
 import Pickr from '@simonwep/pickr';
+import DragDrop from 'editorjs-drag-drop';
+import Alert from 'editorjs-alert';
+import InlineImage from 'editorjs-inline-image';
 class MyHeader extends Header {
     render() {
         const extrawrapper = document.createElement('div');
@@ -58,7 +61,7 @@ class MyHeader extends Header {
 let editor,pickr;
 export default {
 name: "Note_Component",
-    props:['errors','note','csrf','readonly'],
+    props:['errors','note','csrf','readonly','url'],
     data(){
       return{
           dates: [
@@ -118,7 +121,7 @@ name: "Note_Component",
                     carbon.push(this.changeJsToCarbon(date.date));
                 }
                 console.log(carbon);
-                axios.post('http://127.0.0.1:8000/create_note', {
+                axios.post(`${this.url}/create_note`, {
                     id: this.note !== '' ? JSON.parse(this.note).id : 0,
                     _token: this.csrf,
                     title: this.title,
@@ -135,6 +138,7 @@ name: "Note_Component",
         },
     },
     mounted(){
+    console.log(this.url);
     if(this.note!==''){
         for(let schedule of JSON.parse(this.note).schedules){
             console.log(schedule)
@@ -191,6 +195,7 @@ name: "Note_Component",
              readOnly:JSON.parse(this.readonly),
             onReady:()=>{
              const undo= new Undo({editor});
+                new DragDrop(editor);
             },
             data:{
                 blocks:this.note!==''?JSON.parse(JSON.parse(this.note).content):[],
@@ -226,19 +231,16 @@ name: "Note_Component",
                     class: Checklist,
                     inlineToolbar: true,
                 },
-                linkTool: {
-                    class: LinkTool,
+                image: {
+                    class: InlineImage,
+                    inlineToolbar: true,
                     config: {
-                        endpoint: 'http://localhost:8008/', // Your backend endpoint for url data fetching
+                        unsplash: {
+                            appName: 'Note-Me',
+                            clientId: 'lKXdaEBq6Kg1btoyhcXrWeUwfVE33rwo_bBsK5O8rhM'
+                        }
                     }
                 },
-                //***tool attaches doesn't support readOnly Mode**/
-                // attaches: {
-                //     class: AttachesTool,
-                //     config: {
-                //         endpoint: 'http://localhost:8008/uploadFile'
-                //     }
-                // },
                 table: {
                     class: Table,
                 },
@@ -246,6 +248,26 @@ name: "Note_Component",
                     class:CodeTool,
                     config:{
                         placeholder:'Include your codes here'
+                    }
+                },
+                alert: {
+                    class: Alert,
+                    inlineToolbar: true,
+                    shortcut: 'CMD+SHIFT+A',
+                    config: {
+                        defaultType: 'primary',
+                        messagePlaceholder: 'Enter something',
+                    },
+                },
+                hyperlink: {
+                    class: Hyperlink,
+                    config: {
+                        shortcut: 'CMD+L',
+                        target: '_blank',
+                        rel: 'nofollow',
+                        availableTargets: ['_blank', '_self'],
+                        availableRels: ['author', 'noreferrer'],
+                        validate: false,
                     }
                 },
     },

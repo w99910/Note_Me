@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{secure_asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{secure_asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.theme.default.min.css')}}">
     <!-- Scripts -->
 
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>--}}
@@ -24,8 +24,8 @@
 {{--       <button>Sign Up</button>--}}
 {{--</div>--}}
      @yield('content', 'Default Content')
-<script src="{{ secure_asset('js/app.js') }}"></script>
-<script src="{{secure_asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/owl.carousel.min.js')}}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/owl.carousel.min.js')}}"></script>
 @stack('scripts')
 
 

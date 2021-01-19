@@ -83,7 +83,7 @@
 
             </div>
         </div>
-        <div class="text-lg sm:text-2xl font-bold w-full flex items-center justify-center  h-3/5">
+        <div class="text-lg sm:text-2xl font-bold w-full flex justify-center h-3/5" style="text-align: start">
             <div class="owl-carousel">
                 <div>Ease your daily tasks with Note Me.</div>
                 <div>Note me is a SaaS in which you can create your own

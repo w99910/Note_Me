@@ -41,3 +41,10 @@ require __DIR__.'/auth.php';
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/upload/image',function(\Illuminate\Http\Request $req){
+   Log::info($req);
+});
+Route::post('/upload/url',function(\Illuminate\Http\Request $req){
+    Log::info($req);
+});

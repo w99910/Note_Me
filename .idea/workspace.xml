@@ -3,23 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="09965a13-2bda-4aad-8146-bd0bfdba9769" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/General.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/General.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Note_Scheduler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Note_Scheduler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_21_055858_create_projects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_21_055858_create_projects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_22_110322_create_notes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_22_110322_create_notes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_13_070239_create_note__schedulers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_13_070239_create_note__schedulers_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Calendar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Guest_Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Guest_Form.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Note_Component.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Note_Component.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/toast.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/toast.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/guest_layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/guest_layout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome_page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome_page.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/note.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/note.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -186,7 +180,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Qualify_Dashboard" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="terminal" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -272,7 +266,12 @@
       <workItem from="1610532597779" duration="20339000" />
       <workItem from="1610594652673" duration="10091000" />
       <workItem from="1610618589189" duration="16174000" />
-      <workItem from="1610644605826" duration="506000" />
+      <workItem from="1610644605826" duration="783000" />
+      <workItem from="1610979884659" duration="646000" />
+      <workItem from="1610980784374" duration="36000" />
+      <workItem from="1611044324232" duration="868000" />
+      <workItem from="1611050520168" duration="986000" />
+      <workItem from="1611051717432" duration="2750000" />
     </task>
     <servers />
   </component>

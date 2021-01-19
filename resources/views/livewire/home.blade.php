@@ -1,4 +1,4 @@
-<div class="w-full h-full grid grid-cols-4 grid-rows-3 p-3 gap-3 overflow-auto ">
+<div class="w-full h-full grid grid-cols-2 sm:grid-cols-4 grid-rows-3 p-3 gap-3 overflow-auto ">
     @if($notes!==null)
       @foreach($notes as $note)
         <div class="flex border-none rounded-xl flex-col shadow-md text-dark-black p-3" style="background-color:{{$note->color}};">
