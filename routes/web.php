@@ -33,7 +33,6 @@ Route::get('/note/{id}',[App\Http\Controllers\NoteController::class,'ViewNote'])
 
 Route::post('/user/notes',[App\Http\Controllers\NoteController::class,'notes']);
 Route::view('/calendar','calendar')->middleware('auth')->name('calendar');
-Route::view('test','Test');
 Route::view('wel','welcome_page');
 
 require __DIR__.'/auth.php';
