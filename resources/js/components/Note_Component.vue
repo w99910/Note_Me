@@ -1,5 +1,5 @@
 <template>
- <div class="w-full h-full flex flex-col rounded-2xl p-4" v-bind:style="{backgroundColor:custom_color}">
+    <div class="w-full h-full flex flex-col rounded-2xl p-4" v-bind:style="{backgroundColor:custom_color}">
         <div class="w-full flex items-center justify-between">
             <label class="w-full">
                 <input v-model.lazy="title" placeholder="Enter Title" class="w-full focus:outline-none border-b-2 px-3 py-2">
@@ -7,38 +7,38 @@
             <div class="p-2 bg-gray-400 ml-2"><div class="color-picker"></div></div>
             <div class="w-1/12 flex items-center justify-center mx-2 text-white"><button class="px-3 py-1 bg-green-500" @click="save()"><span v-text="note!==''?'Save':'Create'"></span></button></div>
         </div>
-     <v-date-picker v-model="selected.date" updateValue>
-         <template #default="{ inputValue, togglePopover, hidePopover }">
-             <div class="flex flex-wrap">
-                 <button
-                     v-for="(date, i) in dates"
-                     :key="date.date.getTime()"
-                     class="flex items-center bg-indigo-200 hover:bg-indigo-400 text-sm text-indigo-600 font-semibold h-8 px-2 m-1 rounded-lg border-2 border-transparent focus:border-indigo-600 focus:outline-none"
-                     @click.prevent="updateValue(date);dateSelected($event, date, togglePopover);"
-                     ref="button"
-                     v-show="dates.length!==null"
-                 >
-                     {{ date.date.toLocaleDateString() }}
-                     <svg
-                         class="w-4 h-4 text-gray-600 hover:text-indigo-600 ml-1 -mr-1"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         @click.stop="removeDate(date, hidePopover)"
-                     >
-                         <path d="M6 18L18 6M6 6l12 12"></path>
-                     </svg>
-                 </button>
-             </div>
-         </template>
-     </v-date-picker>
-     <button class="text-sm text-indigo-600 font-semibold hover:text-indigo-500 px-2 h-8 focus:outline-none"
-         @click.stop="addDate" v-show="note!==''">
-         + Add Date
-     </button>
-     <div class="w-full p-2 overflow-auto" id="editorjs"></div>
-<!--        <input type="hidden" value="{{csrf}}" name="_token" id="csrf_token">-->
-</div>
+        <v-date-picker v-model="selected.date" updateValue>
+            <template #default="{ inputValue, togglePopover, hidePopover }">
+                <div class="flex flex-wrap">
+                    <button
+                        v-for="(date, i) in dates"
+                        :key="date.date.getTime()"
+                        class="flex items-center bg-indigo-200 hover:bg-indigo-400 text-sm text-indigo-600 font-semibold h-8 px-2 m-1 rounded-lg border-2 border-transparent focus:border-indigo-600 focus:outline-none"
+                        @click.prevent="updateValue(date);dateSelected($event, date, togglePopover);"
+                        ref="button"
+                        v-show="dates.length!==null"
+                    >
+                        {{ date.date.toLocaleDateString() }}
+                        <svg
+                            class="w-4 h-4 text-gray-600 hover:text-indigo-600 ml-1 -mr-1"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            @click.stop="removeDate(date, hidePopover)"
+                        >
+                            <path d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </template>
+        </v-date-picker>
+        <button class="text-sm text-indigo-600 font-semibold hover:text-indigo-500 px-2 h-8 focus:outline-none"
+                @click.stop="addDate" v-show="note!==''">
+            + Add Date
+        </button>
+        <div class="w-full p-2 overflow-auto" id="editorjs"></div>
+        <!--        <input type="hidden" value="{{csrf}}" name="_token" id="csrf_token">-->
+    </div>
 </template>
 
 <script>
@@ -60,30 +60,30 @@ class MyHeader extends Header {
 }
 let editor,pickr;
 export default {
-name: "Note_Component",
+    name: "Note_Component",
     props:['errors','note','csrf','readonly','url'],
     data(){
-      return{
-          dates: [
-          ],
-          selected: {},
-          title:this.note!==''?JSON.parse(this.note).title:'',
-          content:'',
-          custom_color:this.note!==''?JSON.parse(this.note).color:'#ffffff',
-      }
+        return{
+            dates: [
+            ],
+            selected: {},
+            title:this.note!==''?JSON.parse(this.note).title:'',
+            content:'',
+            custom_color:this.note!==''?JSON.parse(this.note).color:'#ffffff',
+        }
     },
     watch:{
-      errors(){
-          console.log(this.errors)
-      },
+        errors(){
+            console.log(this.errors)
+        },
     },
     computed:{
 
     },
     methods: {
         updateValue(value){
-          console.log(value);
-            },
+            console.log(value);
+        },
         addDate() {
             this.dates.push({
                 date: new Date(),
@@ -92,7 +92,7 @@ name: "Note_Component",
                 const btn = this.$refs.button[this.$refs.button.length - 1];
                 btn.click();
             });
-                },
+        },
         removeDate(date, hide) {
             this.dates = this.dates.filter((d) => d !== date);
             hide();
@@ -138,13 +138,13 @@ name: "Note_Component",
         },
     },
     mounted(){
-    console.log(this.url);
-    if(this.note!==''){
-        for(let schedule of JSON.parse(this.note).schedules){
-            console.log(schedule)
-              this.dates.push({date:this.changeCarbonToJsDate(schedule.created_at)});
+        console.log(this.url);
+        if(this.note!==''){
+            for(let schedule of JSON.parse(this.note).schedules){
+                console.log(schedule)
+                this.dates.push({date:this.changeCarbonToJsDate(schedule.created_at)});
+            }
         }
-    }
         pickr = Pickr.create({
             el: '.color-picker',
             theme: 'classic', // or 'monolith', or 'nano'
@@ -192,9 +192,9 @@ name: "Note_Component",
         });
         editor = new EditorJS({
             holder:'editorjs',
-             readOnly:JSON.parse(this.readonly),
+            readOnly:JSON.parse(this.readonly),
             onReady:()=>{
-             const undo= new Undo({editor});
+                const undo= new Undo({editor});
                 new DragDrop(editor);
             },
             data:{
@@ -203,9 +203,9 @@ name: "Note_Component",
             tools: {
 
                 Marker: {
-                class: Marker,
-                shortcut: 'CMD+SHIFT+M',
-        },
+                    class: Marker,
+                    shortcut: 'CMD+SHIFT+M',
+                },
 
                 header: {
                     class: MyHeader,
@@ -270,7 +270,7 @@ name: "Note_Component",
                         validate: false,
                     }
                 },
-    },
+            },
 
         });
     }
@@ -281,7 +281,7 @@ name: "Note_Component",
 #editorjs{
     max-height: inherit !important;
 }
-    /*.my-bg{*/
-    /*    background-color:{{color}};*/
-    /*}*/
+/*.my-bg{*/
+/*    background-color:{{color}};*/
+/*}*/
 </style>

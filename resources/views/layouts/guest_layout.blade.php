@@ -16,8 +16,19 @@
     <link rel="stylesheet" href="{{secure_asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.theme.default.min.css')}}">
 </head>
 <body class="font-lora sm:overflow-hidden overflow-x-hidden">
-     @yield('content', 'Default Content')
-<script src="{{ secure_asset('js/app.js') }}"></script>
+@yield('content', 'Default Content')
+<div class="fixed w-full h-full top-20 left-0 flex items-center justify-center z-10">
+    <video id="video1" class=" fixed w-full top-0 left-0 z-10" preload>
+        <source src="{{secure_asset('/videos/test.mp4')}}" type="video/mp4">
+    </video>
+    <video id="video2" class=" fixed w-full top-0 left-0 z-0" preload>
+        <source src="{{secure_asset('/videos/test_2.mp4')}}" type="video/mp4">
+    </video>
+    {{--         <video id="video" controls="controls" class="w-1/2 h-1/2">--}}
+    {{--             <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">--}}
+    {{--         </video>--}}
+</div>
+<script src="{{secure_asset('js/app.js') }}"></script>
 <script src="{{secure_asset('OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/owlcarousel/owl.carousel.min.js')}}"></script>
 @stack('scripts')
 </body>

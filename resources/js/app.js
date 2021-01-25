@@ -28,6 +28,7 @@ Vue.component('guest_form', require('./components/Guest_Form.vue').default);
 Vue.component('toast', require('./components/toast.vue').default);
 Vue.component('note-component',require('./components/Note_Component.vue').default);
 Vue.component('calendar',require('./components/Calendar.vue').default);
+Vue.component('landing-page',require('./components/Landing_Page').default);
 import EditorJS from '@editorjs/editorjs';
 import Undo from 'editorjs-undo';
 window.Marker = require('@editorjs/marker');
@@ -54,14 +55,14 @@ Vue.component('v-date-picker', DatePicker)
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
- import ClickOutside from 'vue-click-outside';
+import ClickOutside from 'vue-click-outside';
 const app = new Vue({
     el: '#app',
 
     data(){
-    return {
-        isNav:false,
-    }
+        return {
+            isNav:false,
+        }
     },
     methods:{
         toggle_Navbar() {

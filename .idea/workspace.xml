@@ -3,7 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="09965a13-2bda-4aad-8146-bd0bfdba9769" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webfonts/fa-brands-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/webfonts/fa-brands-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webfonts/fa-regular-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/webfonts/fa-regular-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/webfonts/fa-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/webfonts/fa-solid-900.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Note_Component.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Note_Component.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/guest_layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/guest_layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome_page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome_page.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,13 +178,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Qualify_Dashboard" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Note_Me/Note_Me/resources/views/layouts/guest_layout.blade.php" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="terminal" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\Note_Me\resources\js\components" />
       <recent name="C:\xampp\Note_Me" />
       <recent name="C:\xampp\Note_Me\public\images" />
     </key>
@@ -262,6 +272,7 @@
       <workItem from="1611050520168" duration="986000" />
       <workItem from="1611051717432" duration="5161000" />
       <workItem from="1611057778826" duration="302000" />
+      <workItem from="1611553134623" duration="2110000" />
     </task>
     <servers />
   </component>
