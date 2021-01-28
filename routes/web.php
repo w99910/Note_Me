@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,21 @@ use Illuminate\Support\Facades\Route;
 if(env('APP_ENV')==='production'){
     \Illuminate\Support\Facades\URL::forceScheme('https');
 }
+Route::get('/{locale}',function($locale){
+    if (! in_array($locale, ['en', 'mm', 'es'])) {
+        abort(400);
+    }
+    App::setLocale($locale);
+    $localization=[
+          'login'=>__('messages.login'),
+          'signup'=>__('messages.sign-up'),
+        'about'=>__('messages.about'),
+        ];
+    return view('welcome_page',compact('localization','locale'));
+});
 
 Route::get('/', function () {
-    return view('welcome_page');
+    return redirect('/en');
 })->middleware('guest');
 
 Route::post('/note/create/schedules',[App\Http\Controllers\NoteController::class,'createSchedule']);

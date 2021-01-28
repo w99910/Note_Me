@@ -1,6 +1,7 @@
 @extends('layouts.guest_layout')
 @section('content')
-<div class="w-full h-screen relative flex flex-col bg-dark-black text-secondary items-center justify-center px-4 py-4 sm:px-8 sm:py-5" id="app">
+{{--<div class="w-full h-screen relative flex flex-col text-secondary items-center justify-center px-4 py-4 sm:px-8 sm:py-5 z-30" id="app">--}}
+<div class="w-full h-screen relative flex flex-col text-secondary items-center justify-center z-30" id="app">
 {{--        <div class="w-full h-1/5 flex overflow-hidden text-center items-center justify-center text-6xl text-primary font-bowlby">--}}
 {{--            <div class="greeting_text">Note Me</div>--}}
 {{--        </div>--}}
@@ -13,26 +14,27 @@
 {{--        @enderror--}}
 {{--<Guest_Form csrf="{{csrf_token()}}"></Guest_Form>--}}
 {{--    </div>--}}
-           <landing-page></landing-page>
+           <landing-page img_src="{{url('/')}}" current_locale="{{$locale}}" encoded_messages="{{json_encode($localization)}}"></landing-page>
 </div>
 @endsection
 @push('scripts')
     <script>
-        $(document).ready(function(){
-            console.log();
-            $(".owl-carousel").owlCarousel({
-                autoplay: true,
-                autoplayTimeout:4900,
-                items:1,
-                loop:true,
-                smartSpeed: 1500,
-            })
-        });
-        let tl=gsap.timeline({defaults:{ease:'power1.out'}});
-        tl.from('.greeting_text',{
-            y:'-100%',
-            duration:1,
-        });
+
+       // document.addEventListener('DOMContentLoaded',function(){
+       //      console.log('ready');
+       //      $(".owl-carousel").owlCarousel({
+       //          autoplay: true,
+       //          autoplayTimeout:4900,
+       //          items:1,
+       //          loop:true,
+       //          smartSpeed: 1500,
+       //      })
+       //  });
+       //  let tl=gsap.timeline({defaults:{ease:'power1.out'}});
+       //  tl.from('.greeting_text',{
+       //      y:'-100%',
+       //      duration:1,
+       //  });
 
         // tl.fromTo('#content-text',{
         //     x:'-100%',

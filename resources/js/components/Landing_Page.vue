@@ -1,16 +1,84 @@
 <template>
       <div class="animation w-full h-full z-20">
-          <div class="fixed top-0 left-0 bg-white h-16 w-full">
-              <div class="flex items-center">
-                  <label for="checkbox" class="flex">
+          <div class="fixed px-4 py-4 sm:px-8 sm:py-5 top-0 left-0 h-16 z-30 flex items-center bg-white justify-between  w-full border-b-2 border-gray-600">
+              <div class="w-1/2 flex items-center">
+              <h1 class="text-title stroke-1 font-bowlby add_stroke text-3xl">Note Me</h1>
+              </div>
+                  <div class="w-5/12 flex justify-between items-center">
+                    <div class="w-1/2 flex items-center justify-evenly">
+                        <div class="flex items-center py-2">
+                        <label class="flex items-center justify-center px-2 py-1">
+                          <img :src="img_src+'/images/translate.png'" class="w-12 h-12" alt="translate">
+                          <select class="border-none focus:outline-none focus:ring-0" @change="ChangeLocale()" v-model="locale">
+                            <option value="en"><a :href="img_src+'/en'">en</a></option>
+                              <option value="mm"><a :href="img_src+'/mm'">mm</a></option>
+                              <option>es</option>
+                              <option>jpn</option>
+                          </select>
+                      </label>
+                        </div>
+                      <label for="checkbox" class="flex">
                       <input id="checkbox" type="checkbox" value="false" @change="ChangeNight()" v-model="checkbox" />
                       <span class="check"></span>
-                  </label>
+                      </label>
+                    </div>
+                      <div class="flex items-center justify-evenly" :class="locale==='mm'?'text-md w-6/12':'text-xl w-5/12 '">
+                          <button class="focus:outline-none px-2 py-1 font-bowlby tracking-wider text-login " :class="locale==='mm'?'font-extrabold':'add_stroke'">{{messages.login}}</button>
+                          <button class="focus:outline-none px-2 py-1 font-bowlby text-signup tracking-wider " :class="locale==='mm'?'font-extrabold':'add_stroke'">
+                              {{messages.signup}}</button>
+                      </div>
               </div>
           </div>
-<!--          <div class="fixed w-full h-full z-30 flex items-center bg-white justify-center" v-show="isLoading">-->
-<!--              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="512px" height="512px" class="w-10 h-10 animate-spin text-blue-400 fill-current" viewBox="0 0 512 512" xml:space="preserve"><path d="M479.8 226.1c-1.4-8.7-3.1-17.3-5.3-25.8-2.8-10.8-6.4-21.5-10.8-31.8-8.9-21.2-21.1-41-35.9-58.6-16-18.9-35.3-35.2-56.7-47.7C350 49.8 327 41 303 36.1c-12.4-2.5-24.9-4-37.6-4.1-9.9-.1-19.8.3-29.6 1.2-25.5 2.5-50.7 9.6-73.9 20.5-19.9 9.4-38.4 21.6-54.8 36.2-16.4 14.6-30.7 31.6-42.2 50.3-12.7 20.8-22.2 43.5-27.4 67.3-4.2 19-6.2 38.6-5.2 58.1.9 18.9 3.8 37.8 9.5 55.9 3.6 11.5 7.9 22.7 13.3 33.6 5.3 10.7 11.5 21 18.4 30.7 13.8 19.3 30.6 36.4 49.8 50.5 19.6 14.5 41.7 25.7 64.9 33.1 24.2 7.7 49.9 11.3 75.3 10.4 24.8-.8 49.4-5.6 72.6-14.5 22.3-8.6 43.2-20.9 61.5-36.3 9.2-7.8 17.4-16.6 25.1-25.9 7.8-9.4 14.8-19.3 20.6-30 5-9.2 9.2-18.8 12.8-28.5 1.8-4.8 3.5-9.6 4.9-14.6 1.5-5.3 2.6-10.8 3.6-16.2 1.5-8.5 2.1-17.3 1.3-25.9-.7 3.8-1.3 7.5-2.2 11.2-1.1 4.3-2.5 8.5-4.1 12.6-3.2 8.7-7.2 17.1-11 25.5-4.9 10.7-10.6 20.9-16.8 30.8-3.2 5.1-6.5 10.1-10.1 14.9-3.6 4.8-7.7 9.4-11.8 13.9-8.2 9.1-17.1 17.2-27 24.4-10.1 7.4-20.8 13.9-32.1 19.3-22.6 11-47.3 17.6-72.3 19.8-25.6 2.2-51.7-.3-76.3-7.6-23.4-6.9-45.6-18.1-65.1-32.8-18.9-14.3-35.3-31.9-48.2-51.8C75.4 347.8 66.1 324.9 61 301c-1.3-6.2-2.3-12.6-3-18.9-.6-5.4-1.1-10.9-1.3-16.4-.3-11.3.4-23 2.1-34.2 3.7-24.6 11.7-48.3 24.1-69.9 11-19.3 25.3-36.7 42.1-51.4 16.8-14.8 36-26.7 56.8-35.1 12-4.9 24.6-8.5 37.4-10.9 6.5-1.2 13-2.2 19.5-2.7 3.2-.3 6.3-.3 9.5-.6 1.3 0 2.6.1 3.9.1 21.7-.4 43.5 2.4 64.2 8.9 22.3 7 43.3 18.3 61.5 33 19.1 15.4 35 34.4 47 55.8 10.2 18.2 17.5 37.8 21.9 58.2 1 4.7 1.8 9.4 2.6 14.1.7 4.3 3.1 8.3 6.8 10.7 7.8 5.2 18.7 1.7 22.5-6.7 1.3-2.9 1.7-6 1.2-8.9z"/></svg>-->
-<!--          </div>-->
+          <div class="w-full h-full relative items-center justify-center flex flex-col">
+              <div class="h-full w-full overflow-hidden">
+                  <div class="holder h-full w-full transform translate-y-full pt-20 p-4">
+                      <div v-show="isAbout" class="about w-full h-full bg-white flex items-center flex-col border-2 border-gray-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" @click="hide()" class="self-end mt-1 mr-1 cursor-pointer w-12 text-gray-600 stroke-current" viewBox="0 0 24 24"><path fill="#6563ff" d="M13.41406,12l3.293-3.293A.99989.99989,0,0,0,15.293,7.293L12,10.58594,8.707,7.293A.99989.99989,0,0,0,7.293,8.707L10.58594,12,7.293,15.293A.99989.99989,0,0,0,8.707,16.707L12,13.41406l3.293,3.293A.99989.99989,0,0,0,16.707,15.293Z"/><path fill="#b2b1ff" d="M19.0708,4.9292A9.99962,9.99962,0,1,0,4.9292,19.0708,9.99962,9.99962,0,1,0,19.0708,4.9292ZM16.707,15.293A.99989.99989,0,1,1,15.293,16.707L12,13.41406,8.707,16.707A.99989.99989,0,0,1,7.293,15.293L10.58594,12,7.293,8.707A.99989.99989,0,0,1,8.707,7.293L12,10.58594l3.293-3.293A.99989.99989,0,0,1,16.707,8.707L13.41406,12Z"/></svg>
+                      <div class="w-full h-full flex">
+                          <div class="w-1/2 h-full flex items-center justify-center p-3">
+                              <img :src="img_src+'/images/note_me_04.png'" class="w-full" alt="">
+                          </div>
+                          <div class="flex flex-col h-full items-center p-3 w-1/2">
+                              <h2>{{messages.about}}</h2>
+                              <ul class="flex flex-col h-4/6 justify-evenly list-disc">
+                                  <li>
+                                      <h1 class="font-bold">What is Note Me?</h1>
+                                      <p>Note Me is a SaaS app in which you can
+                                          create your own notes, schedule your tasks,
+                                          let note me notify you with email or desktop
+                                          notification browse your notes on any device's
+                                          web browsers.</p>
+                                  </li>
+                                  <li>
+                                      <h1 class="font-bold">How is Note Me created?</h1>
+                                      <p>Note Me is created with Laravel PHP framework, Vue Js framework,TailWind CSS framework,
+                                          and Editor js library, v-calendar library</p>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                      </div>
+                      <div v-show="isReadMe" class="read_me w-full h-full bg-white flex items-center flex-col border-2 border-gray-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" @click="hide()" class="self-end mt-1 mr-1 cursor-pointer w-12 text-gray-600 stroke-current" viewBox="0 0 24 24"><path fill="#6563ff" d="M13.41406,12l3.293-3.293A.99989.99989,0,0,0,15.293,7.293L12,10.58594,8.707,7.293A.99989.99989,0,0,0,7.293,8.707L10.58594,12,7.293,15.293A.99989.99989,0,0,0,8.707,16.707L12,13.41406l3.293,3.293A.99989.99989,0,0,0,16.707,15.293Z"/><path fill="#b2b1ff" d="M19.0708,4.9292A9.99962,9.99962,0,1,0,4.9292,19.0708,9.99962,9.99962,0,1,0,19.0708,4.9292ZM16.707,15.293A.99989.99989,0,1,1,15.293,16.707L12,13.41406,8.707,16.707A.99989.99989,0,0,1,7.293,15.293L10.58594,12,7.293,8.707A.99989.99989,0,0,1,8.707,7.293L12,10.58594l3.293-3.293A.99989.99989,0,0,1,16.707,8.707L13.41406,12Z"/></svg>
+                          <div class="w-full h-full flex">
+                              <div class="w-1/2 h-full flex items-center justify-center p-3">
+                              </div>
+                          </div>
+                      </div>
+                      <div v-show="isContact" class="contact_me w-full h-full bg-white flex items-center flex-col border-2 border-gray-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" @click="hide()" class="self-end mt-1 mr-1 cursor-pointer w-12 text-gray-600 stroke-current" viewBox="0 0 24 24"><path fill="#6563ff" d="M13.41406,12l3.293-3.293A.99989.99989,0,0,0,15.293,7.293L12,10.58594,8.707,7.293A.99989.99989,0,0,0,7.293,8.707L10.58594,12,7.293,15.293A.99989.99989,0,0,0,8.707,16.707L12,13.41406l3.293,3.293A.99989.99989,0,0,0,16.707,15.293Z"/><path fill="#b2b1ff" d="M19.0708,4.9292A9.99962,9.99962,0,1,0,4.9292,19.0708,9.99962,9.99962,0,1,0,19.0708,4.9292ZM16.707,15.293A.99989.99989,0,1,1,15.293,16.707L12,13.41406,8.707,16.707A.99989.99989,0,0,1,7.293,15.293L10.58594,12,7.293,8.707A.99989.99989,0,0,1,8.707,7.293L12,10.58594l3.293-3.293A.99989.99989,0,0,1,16.707,8.707L13.41406,12Z"/></svg>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="w-full bottom-0 left-0 absolute flex justify-center items-center overflow-hidden">
+              <div class="navigation w-9/12 flex h-1/6 py-4 justify-evenly font-poppins">
+                <div class="w-3/12 bg-about px-2 flex items-center justify-center py-4 border-white  border-2"><span class="add_stroke_white stroke-current tracking-widest cursor-pointer" @click="About()">About</span></div>
+                <div class="w-3/12 bg-read_me px-2 flex items-center justify-center py-4 border-white  border-2"><span class="add_stroke_white stroke-current tracking-widest cursor-pointer" @click="ReadMe()">Read Me</span></div>
+                <div class="w-3/12 bg-contact_me px-2 flex items-center justify-center py-4 border-white  border-2"><span class="add_stroke_white stroke-current tracking-widest cursor-pointer" @click="ContactMe()">Contact Me</span></div>
+            </div>
+              </div>
+          </div>
       </div>
 </template>
 
@@ -24,13 +92,71 @@ import {BufferGeometryUtils} from 'three/examples/jsm/utils/BufferGeometryUtils'
 let scene,renderer,obj,camera,container,clock,controls,composer;
 export default {
     name: "landing-page",
+    props:['img_src','encoded_messages','current_locale'],
     data(){
         return{
             checkbox:false,
             isLoading:true,
+            isAbout:false,
+            isReadMe:false,
+            isContact:false,
+            locale:this.current_locale,
+            messages:JSON.parse(this.encoded_messages
+            ),
+        }
+    },
+    computed:{
+        currentLocale(){
+            return 'messages.'+this.locale;
         }
     },
     methods:{
+        hide(){
+            let el=this;
+            let tl=gsap.timeline({ease:'back.out(.5)'});
+            tl.to('.holder',{
+                y:'100%',
+                duration:.8,
+                ease:'power1.out'
+            })
+            tl.to('.navigation',{
+                y:'0%',
+                duration:.7,
+                onComplete:()=>{
+                    el.isReadMe=false;
+                    el.isAbout=false;
+                    el.isContact=false;
+                }
+            });
+
+        },
+        show(){
+            let tl=gsap.timeline({ease:'back.in(.5)'});
+          tl.to('.navigation',{
+              y:'100%',
+              duration:.7,
+          });
+            tl.to('.holder',{
+                y:'0%',
+                duration:.8,
+                ease:'power1.out'
+            })
+        },
+        About(){
+          this.isAbout=true;
+          this.show();
+        },
+        ReadMe(){
+          this.isReadMe=true;
+          this.show();
+        },
+        ContactMe(){
+            this.isContact=true;
+            this.show();
+        },
+        ChangeLocale(){
+              window.location.href=this.img_src+`/${this.locale}`
+        },
         ChangeNight(){
             let intervalRewind;
             let video1=document.querySelector('#video1');
@@ -79,6 +205,8 @@ export default {
         clock=new THREE.Clock();
     },
     mounted(){
+        console.log(this.messages,this.locale);
+        console.log(this.img_src)
         let video1=document.getElementById('video2');
         let el=this;
         // container=document.querySelector('.animation').getBoundingClientRect();
@@ -150,15 +278,25 @@ input[type='checkbox']:checked ~ .check{
     position:absolute;
     top:2px;
     left:2px;
-    background:#fff;
+    background-color:#fff;
     width:16px;
     height:16px;
     border-radius: 50%;
     transition:0.5s;
+    display: block;
+    background-size: contain;
+    background-image: url("/images/night.png");
 }
 input[type='checkbox']:checked ~ .check:before{
     transform: translateX(20px);
     right:2px;
-    background:#092c3e;
+    background-color:#092c3e;
+    background-image: url("/images/sun_1.png");
+}
+.add_stroke{
+    -webkit-text-stroke: 1px #404040;
+}
+.add_stroke_white{
+    -webkit-text-stroke: 1px white;
 }
 </style>
