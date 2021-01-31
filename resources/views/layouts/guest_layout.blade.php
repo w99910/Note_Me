@@ -18,10 +18,10 @@
 <body class="font-lora sm:overflow-hidden overflow-x-hidden">
 @yield('content', 'Default Content')
 
-    <video id="video1" class=" fixed w-full top-0 left-0 z-10" preload>
+    <video id="video1" class=" fixed lg:w-full top-0 left-0 z-10 object-cover h-full lg:h-auto " preload>
         <source src="{{secure_asset('/videos/test.mp4')}}" type="video/mp4">
     </video>
-    <video id="video2" class=" fixed w-full top-0 left-0 z-0" preload>
+    <video id="video2" class=" fixed lg:w-full top-0 left-0 z-0 object-cover h-full lg:h-auto " preload>
         <source src="{{secure_asset('/videos/test_2.mp4')}}" type="video/mp4">
 
     </video>

@@ -186,6 +186,19 @@ export default {
         HasString(value){
           return value.trim().length===0;
         },
+        Login(){
+
+            if(this.ValidateForms(this.email,this.password)) {
+
+                axios.post('/note_me_login', {
+                    email: this.email,
+                    password: this.password,
+                    remember: this.remember
+                }).then((res) => {
+                    console.log(res)
+                });
+            }
+        },
         togglePass(){
             let input=document.getElementById('password1');
             if(input.type==='password')
@@ -196,19 +209,7 @@ export default {
               input.type='password';
           }
         },
-        Login(){
 
-            if(this.ValidateForms(this.email,this.password)) {
-
-                axios.post('/note_me_login', {
-                    email: this.email,
-                    password: this.password,
-                    remember: this.remember
-                }).then((res) => {
-                   console.log(res)
-                });
-            }
-        },
         ValidateForms(email,password){
           return this.isValidEmail(email)&&password.trim().length!==0;
         },

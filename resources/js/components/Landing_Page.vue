@@ -1,6 +1,6 @@
 <template>
       <div class="animation w-full h-full z-20">
-          <div class="fixed px-4 py-4 sm:px-8 sm:py-5 top-0 left-0 h-16 z-30 flex items-center bg-white justify-between  w-full border-b-2 border-gray-600">
+          <div data-intro="Intro " class="nav-nav fixed px-4 py-4 sm:px-8 sm:py-5 top-0 left-0 h-16 z-30 flex items-center bg-white justify-between  w-full border-b-2 border-gray-600">
               <div class="w-1/2 flex items-center">
               <h1 class="text-title stroke-1 font-bowlby add_stroke text-3xl">Note Me</h1>
               </div>
@@ -23,8 +23,8 @@
                       </label>
                     </div>
                       <div class="flex items-center justify-evenly" :class="locale==='mm'?'text-md w-6/12':'text-xl w-5/12 '">
-                          <button class="focus:outline-none px-2 py-1 font-bowlby tracking-wider text-login " :class="locale==='mm'?'font-extrabold':'add_stroke'">{{messages.login}}</button>
-                          <button class="focus:outline-none px-2 py-1 font-bowlby text-signup tracking-wider " :class="locale==='mm'?'font-extrabold':'add_stroke'">
+                          <button class="focus:outline-none px-2 py-1 font-bowlby tracking-wider text-login " :class="locale==='mm'?'font-extrabold':'add_stroke'" @click="ShowLogin()">{{messages.login}}</button>
+                          <button class="focus:outline-none px-2 py-1 font-bowlby text-signup tracking-wider " :class="locale==='mm'?'font-extrabold':'add_stroke'" @click="ShowSignUp()">
                               {{messages.signup}}</button>
                       </div>
               </div>
@@ -69,10 +69,18 @@
                           <svg xmlns="http://www.w3.org/2000/svg" @click="hide()" class="self-end mt-1 mr-1 cursor-pointer w-12 text-gray-600 stroke-current" viewBox="0 0 24 24"><path fill="#6563ff" d="M13.41406,12l3.293-3.293A.99989.99989,0,0,0,15.293,7.293L12,10.58594,8.707,7.293A.99989.99989,0,0,0,7.293,8.707L10.58594,12,7.293,15.293A.99989.99989,0,0,0,8.707,16.707L12,13.41406l3.293,3.293A.99989.99989,0,0,0,16.707,15.293Z"/><path fill="#b2b1ff" d="M19.0708,4.9292A9.99962,9.99962,0,1,0,4.9292,19.0708,9.99962,9.99962,0,1,0,19.0708,4.9292ZM16.707,15.293A.99989.99989,0,1,1,15.293,16.707L12,13.41406,8.707,16.707A.99989.99989,0,0,1,7.293,15.293L10.58594,12,7.293,8.707A.99989.99989,0,0,1,8.707,7.293L12,10.58594l3.293-3.293A.99989.99989,0,0,1,16.707,8.707L13.41406,12Z"/></svg>
 
                       </div>
+                      <div v-show="isLogin" class="contact_me w-full h-full bg-white flex items-center flex-col border-2 border-gray-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" @click="hide()" class="self-end mt-1 mr-1 cursor-pointer w-12 text-gray-600 stroke-current" viewBox="0 0 24 24"><path fill="#6563ff" d="M13.41406,12l3.293-3.293A.99989.99989,0,0,0,15.293,7.293L12,10.58594,8.707,7.293A.99989.99989,0,0,0,7.293,8.707L10.58594,12,7.293,15.293A.99989.99989,0,0,0,8.707,16.707L12,13.41406l3.293,3.293A.99989.99989,0,0,0,16.707,15.293Z"/><path fill="#b2b1ff" d="M19.0708,4.9292A9.99962,9.99962,0,1,0,4.9292,19.0708,9.99962,9.99962,0,1,0,19.0708,4.9292ZM16.707,15.293A.99989.99989,0,1,1,15.293,16.707L12,13.41406,8.707,16.707A.99989.99989,0,0,1,7.293,15.293L10.58594,12,7.293,8.707A.99989.99989,0,0,1,8.707,7.293L12,10.58594l3.293-3.293A.99989.99989,0,0,1,16.707,8.707L13.41406,12Z"/></svg>
+                           <login-form @isChange="ChangeLogin" :csrf="csrf" :locale="locale"></login-form>
+                      </div>
+                      <div v-show="isSignUp" class="contact_me w-full h-full bg-white flex items-center flex-col border-2 border-gray-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" @click="hide()" class="self-end mt-1 mr-1 cursor-pointer w-12 text-gray-600 stroke-current" viewBox="0 0 24 24"><path fill="#6563ff" d="M13.41406,12l3.293-3.293A.99989.99989,0,0,0,15.293,7.293L12,10.58594,8.707,7.293A.99989.99989,0,0,0,7.293,8.707L10.58594,12,7.293,15.293A.99989.99989,0,0,0,8.707,16.707L12,13.41406l3.293,3.293A.99989.99989,0,0,0,16.707,15.293Z"/><path fill="#b2b1ff" d="M19.0708,4.9292A9.99962,9.99962,0,1,0,4.9292,19.0708,9.99962,9.99962,0,1,0,19.0708,4.9292ZM16.707,15.293A.99989.99989,0,1,1,15.293,16.707L12,13.41406,8.707,16.707A.99989.99989,0,0,1,7.293,15.293L10.58594,12,7.293,8.707A.99989.99989,0,0,1,8.707,7.293L12,10.58594l3.293-3.293A.99989.99989,0,0,1,16.707,8.707L13.41406,12Z"/></svg>
+                            <signup-form @isChange="ChangeSignUp"  :csrf="csrf" :locale="locale"></signup-form>
+                      </div>
                   </div>
               </div>
               <div class="w-full bottom-0 left-0 absolute flex justify-center items-center overflow-hidden">
-              <div class="navigation w-9/12 flex h-1/6 py-4 justify-evenly font-poppins">
+              <div class="navigation w-9/12 flex h-24 sm:h-32 md:h-1/6 py-4 justify-evenly font-poppins">
                 <div class="w-3/12 bg-about px-2 flex items-center justify-center py-4 border-white  border-2"><span class="add_stroke_white stroke-current tracking-widest cursor-pointer" @click="About()">About</span></div>
                 <div class="w-3/12 bg-read_me px-2 flex items-center justify-center py-4 border-white  border-2"><span class="add_stroke_white stroke-current tracking-widest cursor-pointer" @click="ReadMe()">Read Me</span></div>
                 <div class="w-3/12 bg-contact_me px-2 flex items-center justify-center py-4 border-white  border-2"><span class="add_stroke_white stroke-current tracking-widest cursor-pointer" @click="ContactMe()">Contact Me</span></div>
@@ -89,10 +97,18 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 import {BufferGeometryUtils} from 'three/examples/jsm/utils/BufferGeometryUtils';
+import introJs from 'intro.js';
+import "intro.js/minified/introjs.min.css";
+import Login_Form from "./Login_Form";
+import SignUp_Form from "./SignUp_Form";
 let scene,renderer,obj,camera,container,clock,controls,composer;
 export default {
     name: "landing-page",
-    props:['img_src','encoded_messages','current_locale'],
+    components:{
+      'login-form':Login_Form,
+        'signup-form':SignUp_Form,
+    },
+    props:['img_src','encoded_messages','current_locale','csrf'],
     data(){
         return{
             checkbox:false,
@@ -100,15 +116,14 @@ export default {
             isAbout:false,
             isReadMe:false,
             isContact:false,
+            isLogin:true,
+            isSignUp:true,
             locale:this.current_locale,
             messages:JSON.parse(this.encoded_messages
             ),
         }
     },
     computed:{
-        currentLocale(){
-            return 'messages.'+this.locale;
-        }
     },
     methods:{
         hide(){
@@ -121,20 +136,31 @@ export default {
             })
             tl.to('.navigation',{
                 y:'0%',
-                duration:.7,
+                duration:.6,
                 onComplete:()=>{
-                    el.isReadMe=false;
-                    el.isAbout=false;
-                    el.isContact=false;
+                   el.closeAll();
+                    el.isLogin=false;
+                    el.isSignUp=false;
                 }
             });
-
+        },
+        ChangeLogin(value){
+          if(value){
+              console.log('change');
+              this.isLogin=false;
+          }
+        },
+        ChangeSignUp(value){
+          if(value){
+              console.log('change');
+              this.isSignUp=false;
+          }
         },
         show(){
-            let tl=gsap.timeline({ease:'back.in(.5)'});
+            let tl=gsap.timeline({ease:'back.in(.8)'});
           tl.to('.navigation',{
               y:'100%',
-              duration:.7,
+              duration:.6,
           });
             tl.to('.holder',{
                 y:'0%',
@@ -154,17 +180,50 @@ export default {
             this.isContact=true;
             this.show();
         },
+       async ShowLogin(){
+            if(this.isSignUp||this.isLogin){
+                this.isSignUp=false;
+                this.isLogin=true;
+            }else if(this.isAbout||this.isReadMe||this.isContact)
+            {
+                this.closeAll();
+                this.isLogin=true;
+            }else
+            {
+                this.isLogin = true;
+                this.show();
+            }
+       },
+        closeAll(){
+            this.isAbout=false;this.isReadMe=false;this.isContact=false;
+        },
+       async ShowSignUp(){
+            if(this.isSignUp||this.isLogin){
+              this.isLogin=false;
+              this.isSignUp=true;
+            }else if(this.isAbout||this.isReadMe||this.isContact)
+            {
+               this.closeAll();
+               this.isSignUp=true;
+            }else
+            {
+                this.isSignUp = true;
+                this.show();
+            }
+       },
         ChangeLocale(){
-              window.location.href=this.img_src+`/${this.locale}`
+              // window.location.href=this.img_src+`/${this.locale}`
+            axios.post('/set/locale',{value:this.locale}).then((res)=>{
+                // console.log(res);
+                this.messages=res.data;
+            })
         },
         ChangeNight(){
-            let intervalRewind;
+
             let video1=document.querySelector('#video1');
             let video2=document.querySelector('#video2');
             console.log(video1.duration)
             if(!this.checkbox) {
-                let startSystemTime = new Date().getTime();
-                let startVideoTime = video1.currentTime;
                 video1.classList.remove('z-10')
                 video2.classList.add('z-10')
                 video2.classList.remove('z-0')
@@ -183,16 +242,6 @@ export default {
 
                video1.play();
             }
-
-            // console.log(video);
-            // if(!this.checkbox){
-            //
-            //     console.log(video.currentTime)
-            // }else{
-            //     video.play();
-            //     console.log(video.currentTime)
-            // }
-            // console.log(video.currentTime)
         },
           _Req(){
               // controls.update();
@@ -205,49 +254,7 @@ export default {
         clock=new THREE.Clock();
     },
     mounted(){
-        console.log(this.messages,this.locale);
-        console.log(this.img_src)
-        let video1=document.getElementById('video2');
-        let el=this;
-        // container=document.querySelector('.animation').getBoundingClientRect();
-      // scene=new THREE.Scene();
-      // camera=new THREE.PerspectiveCamera(45,container.width/container.height,0.1,500);
-      //   camera.position.set( 0, 0, 20 );
-      // renderer=new THREE.WebGLRenderer({alpha:0, antialiased:true});
-      // renderer.setClearColor(0x404040,0);
-      // renderer.setSize(container.width,container.height);
-      //   renderer.outputEncoding = THREE.sRGBEncoding;
-      //   composer = new EffectComposer( renderer );
-      //   document.querySelector('.animation').appendChild(renderer.domElement);
-      //   const ambientLight = new THREE.AmbientLight( 0x404040, 0.05 );
-      //   scene.add( ambientLight );
-      //
-      //   const pointLight = new THREE.PointLight( 0xffffff, 0.4 );
-        // camera.add( pointLight );
-        // scene.add( camera );
-        // controls=new OrbitControls(camera,renderer.domElement);
-        // controls.update();
-        // let loader=new GLTFLoader();
-        //  loader.load('/images/note_me_21thJan.glb',function(gltf){
-        //      console.log(gltf);
-        //      obj=gltf.scene;
 
-             // for(let children of obj.children){
-             //   if(children.type!=='Mesh')
-             //   {
-             //       scene.add(children);
-             //   }
-             //   else if(children.children.length!==0){
-             //       for(let child of children.children){
-             //           if(child.type!=='Mesh'){
-             //               scene.add(child);
-             //           }
-             //       }
-             //   }
-             // }
-        //      scene.add(obj);
-        // });
-        //  this._Req();
     }
 
 }
@@ -278,7 +285,7 @@ input[type='checkbox']:checked ~ .check{
     position:absolute;
     top:2px;
     left:2px;
-    background-color:#fff;
+    background-color:#0c0c0c;
     width:16px;
     height:16px;
     border-radius: 50%;

@@ -2,19 +2,10 @@
 @section('content')
 {{--<div class="w-full h-screen relative flex flex-col text-secondary items-center justify-center px-4 py-4 sm:px-8 sm:py-5 z-30" id="app">--}}
 <div class="w-full h-screen relative flex flex-col text-secondary items-center justify-center z-30" id="app">
-{{--        <div class="w-full h-1/5 flex overflow-hidden text-center items-center justify-center text-6xl text-primary font-bowlby">--}}
-{{--            <div class="greeting_text">Note Me</div>--}}
-{{--        </div>--}}
-{{--    <div class="w-full h-full sm:h-4/5 flex sm:flex-row flex-col items-center">--}}
-{{--        <div class="flex items-center justify-center w-full sm:w-6/12 sm:m-0 m-4">--}}
-{{--            <img src="{{asset('/images/note_me_04.png')}}" alt="note_me" class="w-full">--}}
-{{--        </div>--}}
-{{--        @error('email')--}}
-{{--        <toast message="{{$message}}" time=".5" start="true"></toast>--}}
-{{--        @enderror--}}
-{{--<Guest_Form csrf="{{csrf_token()}}"></Guest_Form>--}}
-{{--    </div>--}}
-           <landing-page img_src="{{url('/')}}" current_locale="{{$locale}}" encoded_messages="{{json_encode($localization)}}"></landing-page>
+        @error('email')
+        <toast message="{{$message}}" time=".5" start="{{true}}" delay="1"></toast>
+        @enderror
+           <landing-page csrf="{{csrf_token()}}" img_src="{{url('/')}}" current_locale="{{$locale}}" encoded_messages="{{json_encode($localization)}}"></landing-page>
 </div>
 @endsection
 @push('scripts')

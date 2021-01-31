@@ -1,43 +1,58 @@
 <template>
-    <div class="w-full h-full flex flex-col rounded-2xl p-4" v-bind:style="{backgroundColor:custom_color}">
-        <div class="w-full flex items-center justify-between">
-            <label class="w-full">
-                <input v-model.lazy="title" placeholder="Enter Title" class="w-full focus:outline-none border-b-2 px-3 py-2">
-            </label>
-            <div class="p-2 bg-gray-400 ml-2"><div class="color-picker"></div></div>
-            <div class="w-1/12 flex items-center justify-center mx-2 text-white"><button class="px-3 py-1 bg-green-500" @click="save()"><span v-text="note!==''?'Save':'Create'"></span></button></div>
-        </div>
-        <v-date-picker v-model="selected.date" updateValue>
-            <template #default="{ inputValue, togglePopover, hidePopover }">
-                <div class="flex flex-wrap">
-                    <button
-                        v-for="(date, i) in dates"
-                        :key="date.date.getTime()"
-                        class="flex items-center bg-indigo-200 hover:bg-indigo-400 text-sm text-indigo-600 font-semibold h-8 px-2 m-1 rounded-lg border-2 border-transparent focus:border-indigo-600 focus:outline-none"
-                        @click.prevent="updateValue(date);dateSelected($event, date, togglePopover);"
-                        ref="button"
-                        v-show="dates.length!==null"
-                    >
-                        {{ date.date.toLocaleDateString() }}
-                        <svg
-                            class="w-4 h-4 text-gray-600 hover:text-indigo-600 ml-1 -mr-1"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            @click.stop="removeDate(date, hidePopover)"
-                        >
-                            <path d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
+    <div class="w-full h-full flex justify-evenly p-2 bg-white dark:bg-secondary">
+        <div class="w-8/12 h-full flex flex-col p-4 border-2 border-gray-600  mt-2 " :style="{backgroundColor:custom_color}">
+            <div class="w-full mb-1 flex items-center justify-evenly">
+                <label class="w-9/12">
+                    <input v-model.lazy="title" placeholder="Enter Awesome Title"
+                           class="w-full focus:outline-none border-b-2 bg-transparent py-1 ">
+                </label>
+                <div class="p-2 bg-gray-400 ml-2">
+                    <div class="color-picker"></div>
                 </div>
-            </template>
-        </v-date-picker>
-        <button class="text-sm text-indigo-600 font-semibold hover:text-indigo-500 px-2 h-8 focus:outline-none"
-                @click.stop="addDate" v-show="note!==''">
-            + Add Date
-        </button>
-        <div class="w-full p-2 overflow-auto" id="editorjs"></div>
-        <!--        <input type="hidden" value="{{csrf}}" name="_token" id="csrf_token">-->
+
+            </div>
+
+            <div class="w-full p-2 overflow-auto" id="editorjs"></div>
+            <!--        <input type="hidden" value="{{csrf}}" name="_token" id="csrf_token">-->
+        </div>
+        <div class="w-3/12 flex h-5/10 flex-col mt-3 p-2 border-l-2 border-b-2 border-gray-600">
+            <div class="flex items-center justify-between mb-2 py-3 w-full">
+                <button class="px-3 py-1 bg-green-500 text-white focus:outline-none" @click="save()"><span
+                        v-text="note!==''?'Save':'Create'"></span></button>
+                <button v-if="note!==null" class="px-3 py-1 bg-dark-red text-white focus:outline-none" @click="deleteNote()"><span>Delete</span></button>
+                <button class="text-sm text-indigo-600 dark:text-blue-100 font-semibold hover:text-indigo-500 px-2 h-8 focus:outline-none"
+                        @click.stop="addDate">
+                    + Add Date
+                </button>
+            </div>
+            <v-date-picker v-model="selected.date" updateValue>
+                <template #default="{ inputValue, togglePopover, hidePopover }">
+                    <div class="flex flex-wrap">
+                        <button
+                            v-for="(date, i) in dates"
+                            :key="date.date.getTime()"
+                            class="flex items-center bg-indigo-200 hover:bg-indigo-400 text-sm text-indigo-600 font-semibold h-8 px-2 m-1 rounded-lg border-2 border-transparent focus:border-indigo-600 focus:outline-none"
+                            @click.prevent="updateValue(date);dateSelected($event, date, togglePopover);"
+                            ref="button"
+
+                        >
+                            <!--                        v-show="dates.length!==null"-->
+                            {{ date.date.toLocaleDateString() }}
+                            <svg
+                                class="w-4 h-4 text-gray-600 hover:text-indigo-600 ml-1 -mr-1"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                @click.stop="removeDate(date, hidePopover)"
+                            >
+                                <path d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </template>
+            </v-date-picker>
+        </div>
+        <toast v-if="showToast" :message="error_message" :time="1" start @changeToast="HideToast"></toast>
     </div>
 </template>
 
@@ -48,6 +63,7 @@ import Pickr from '@simonwep/pickr';
 import DragDrop from 'editorjs-drag-drop';
 import Alert from 'editorjs-alert';
 import InlineImage from 'editorjs-inline-image';
+import Scrollbar from 'smooth-scrollbar';
 class MyHeader extends Header {
     render() {
         const extrawrapper = document.createElement('div');
@@ -58,31 +74,48 @@ class MyHeader extends Header {
         return extrawrapper;
     }
 }
-let editor,pickr;
+
+let editor, pickr;
 export default {
     name: "Note_Component",
-    props:['errors','note','csrf','readonly','url'],
-    data(){
-        return{
-            dates: [
-            ],
+    props: ['errors', 'note', 'csrf', 'readonly', 'url'],
+    data() {
+        return {
+            dates: [],
             selected: {},
-            title:this.note!==''?JSON.parse(this.note).title:'',
-            content:'',
-            custom_color:this.note!==''?JSON.parse(this.note).color:'#ffffff',
+            title: this.note !== '' ? JSON.parse(this.note).title : '',
+            content: '',
+            custom_color: this.note !== '' ? JSON.parse(this.note).color : '#ffffff',
+            showToast:false,
+            error_message:'',
         }
     },
-    watch:{
-        errors(){
+    watch: {
+        errors() {
             console.log(this.errors)
         },
     },
-    computed:{
-
-    },
+    computed: {},
     methods: {
         updateValue(value){
             console.log(value);
+        },
+        deleteNote(){
+             if(confirm('Are you sure?')){
+               axios.post('/delete/note',{
+                   id: JSON.parse(this.note).id,
+                   _token: this.csrf,
+               }).then((res)=>{
+              console.log(res);
+              if(res.data==='Error'){
+                  this.error_message= "Notes of whom you didn't belong to cannot be deleted"
+                  this.showToast=true;
+              }
+               });
+             }
+        },
+        HideToast(){
+          this.showToast=false;
         },
         addDate() {
             this.dates.push({
@@ -102,22 +135,25 @@ export default {
             toggle({ref: e.target});
 
         },
-        changeCarbonToJsDate(a){
-            let date=a.split("T")[0].split('-')
-            return new Date(date[0],date[1]-1,date[2]);
+        changeCarbonToJsDate(a) {
+            let date = a.split("T")[0].split('-')
+            return new Date(date[0], date[1] - 1, date[2]);
         },
-        changeJsToCarbon(a){
-            let day=a.getDate();
-            let month=a.getMonth();
-            let year=a.getFullYear();
-            return `${year}-${month+1}-${day}`;
+        changeJsToCarbon(a) {
+            let day = a.getDate();
+            let month = a.getMonth();
+            let year = a.getFullYear();
+            return `${year}-${month + 1}-${day}`;
         },
         save() {
+            if(this.title.trim().length ===0){
+                this.error_message='Title cannot be empty!';
+                    return this.showToast = true;
+
+            }
             editor.save().then((output) => {
-                console.log(axios);
-                console.log(this.dates)
-                let carbon=[];
-                for(let date of this.dates){
+                let carbon = [];
+                for (let date of this.dates) {
                     carbon.push(this.changeJsToCarbon(date.date));
                 }
                 console.log(carbon);
@@ -127,7 +163,7 @@ export default {
                     title: this.title,
                     blocks: JSON.stringify(output.blocks),
                     color: this.custom_color,
-                    schedules:carbon,
+                    schedules: carbon,
                 }).then((res) => {
                     console.log(res)
                     if (res.status === 200) {
@@ -137,12 +173,12 @@ export default {
             })
         },
     },
-    mounted(){
+    mounted() {
         console.log(this.url);
-        if(this.note!==''){
-            for(let schedule of JSON.parse(this.note).schedules){
+        if (this.note !== '') {
+            for (let schedule of JSON.parse(this.note).schedules) {
                 console.log(schedule)
-                this.dates.push({date:this.changeCarbonToJsDate(schedule.created_at)});
+                this.dates.push({date: this.changeCarbonToJsDate(schedule.created_at)});
             }
         }
         pickr = Pickr.create({
@@ -188,17 +224,18 @@ export default {
 
         pickr.on('change', (color, source, instance) => {
             console.log('Event: "change"', color.toHEXA().toString());
-            this.custom_color= color.toHEXA().toString();
+            this.custom_color = color.toHEXA().toString();
         });
         editor = new EditorJS({
-            holder:'editorjs',
-            readOnly:JSON.parse(this.readonly),
-            onReady:()=>{
-                const undo= new Undo({editor});
+            holder: 'editorjs',
+            readOnly: JSON.parse(this.readonly),
+            onReady: () => {
+                const undo = new Undo({editor});
                 new DragDrop(editor);
+                Scrollbar.init(document.querySelector('#editorjs'),{ damping: 0.06 });
             },
-            data:{
-                blocks:this.note!==''?JSON.parse(JSON.parse(this.note).content):[],
+            data: {
+                blocks: this.note !== '' ? JSON.parse(JSON.parse(this.note).content) : [],
             },
             tools: {
 
@@ -219,13 +256,13 @@ export default {
                     class: Paragraph,
                     inlineToolbar: true,
                 },
-                list:{
-                    class:list,
+                list: {
+                    class: list,
                     inlineToolbar: true,
                 },
                 underline: Underline,
-                quote:{
-                    class:quote
+                quote: {
+                    class: quote
                 },
                 checklist: {
                     class: Checklist,
@@ -245,9 +282,9 @@ export default {
                     class: Table,
                 },
                 code: {
-                    class:CodeTool,
-                    config:{
-                        placeholder:'Include your codes here'
+                    class: CodeTool,
+                    config: {
+                        placeholder: 'Include your codes here'
                     }
                 },
                 alert: {
@@ -278,9 +315,13 @@ export default {
 </script>
 
 <style scoped>
-#editorjs{
+#editorjs {
     max-height: inherit !important;
 }
+#editorjs::-webkit-scrollbar{
+    background:transparent;
+}
+
 /*.my-bg{*/
 /*    background-color:{{color}};*/
 /*}*/

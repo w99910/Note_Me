@@ -40,6 +40,14 @@ class NoteController extends Controller
           return $e;
         }
     }
+    public function delete(Request $req){
+            $note=Note::find($req->id);
+            if($note->user_id===Auth::id()){
+                $note->delete();
+                return redirect()->route('dashboard');
+            }
+            return response()->json('Error');
+    }
     public function ViewNote($id){
         $note=Note::with('schedules')->find($id);
         if($note!==null) {
@@ -60,5 +68,26 @@ class NoteController extends Controller
             $user=User::find(Auth::id());
             Log::info($user->schedules);
             return $user!==null?response()->json(['schedules'=>$user->schedules]):['error'=>'There is no such user'];
+    }
+    public function schedules(){
+        $user=Auth::user();
+        return response()->json($user->schedules);
+    }
+    public function trash(){
+        return response()->json(Note::onlyTrashed()->where('user_id',Auth::id())->get());
+    }
+    public function Restore(Request $req){
+        $note=Note::onlyTrashed()->find($req->id);
+        try{
+            if(Auth::id()===$note->user_id) {
+                $note->restore();
+                return response()->json(route('dashboard'));
+            }else{
+                return response()->json('Do not own notes');
+            }
+           }catch(\Exception $e){
+               return response()->json($e);
+           }
+
     }
 }

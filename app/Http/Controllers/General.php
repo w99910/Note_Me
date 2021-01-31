@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 
 class General extends Controller
@@ -17,14 +18,12 @@ class General extends Controller
                ]);
 
                if($validator) {
-
-
                    if (Auth::attempt(['email'=>$req->email,'password'=>$req->password])) {
+
                        $user = User::where('email', $req->email)->first();
                        return Hash::check($req['password'], $user->password) ? $this->Login($user, $req) : redirect()->back()->withErrors(['email' => 'Invalid Credentials']);
                    }
                }
-
         return redirect()->back()->withErrors(['email'=>'Incorrect Email or Password.Please Try again']);
     }
     public function Login($user,$req){
@@ -43,6 +42,18 @@ class General extends Controller
          Auth::Login($user);
          return redirect()->route('dashboard');
         }
-        return back()->withErrors(['email'=>'There is user that already have the email.Please try another email.']);
+        return back()->withErrors(['email'=>'Something went wrong. Please Try again.']);
+    }
+    public function changeLocale(Request $req){
+        if(!in_array($req->value,['en','mm','es'])){
+            abort(400);
+        }
+        App::setLocale($req->value);
+        $localization=[
+            'login'=>__('messages.login'),
+            'signup'=>__('messages.sign-up'),
+            'about'=>__('messages.about'),
+        ];
+        return response()->json($localization);
     }
 }

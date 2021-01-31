@@ -22,6 +22,15 @@
     .blend-multiply{
      mix-blend-mode: multiply;
     }
+    .add_stroke{
+        -webkit-text-stroke: 1px #404040;
+    }
+    .add_stroke_normal{
+        -webkit-text-stroke: 1px;
+    }
+    .add_stroke_white{
+        -webkit-text-stroke: 1px white;
+    }
     .neumorphism{
         box-shadow:  20px -20px 40spx #1b1818,
         -20px 20px 40px #2f2c2c;

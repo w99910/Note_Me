@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Note extends Model
 {
-   protected $guarded=[];
+    use SoftDeletes;
+    protected $guarded=[];
     use HasFactory;
     protected $casts=[
       'content'=>'array',

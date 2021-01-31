@@ -24,11 +24,15 @@ window.THREE=THREE;
 Vue.component('Test', require('./components/Test.vue').default);
 Vue.component('form-component', require('./components/Form.vue').default);
 Vue.component('Note', require('./components/Note.vue').default);
-Vue.component('guest_form', require('./components/Guest_Form.vue').default);
+// Vue.component('guest_form', require('./components/Guest_Form.vue').default);
 Vue.component('toast', require('./components/toast.vue').default);
 Vue.component('note-component',require('./components/Note_Component.vue').default);
 Vue.component('calendar',require('./components/Calendar.vue').default);
 Vue.component('landing-page',require('./components/Landing_Page').default);
+Vue.component('weather',require('./components/small-components/Weather').default);
+Vue.component('trash',require('./components/small-components/trash').default);
+Vue.component('quote',require('./components/small-components/Quote').default);
+Vue.component('tiny-calendar',require('./components/small-components/tiny-calendar').default);
 import EditorJS from '@editorjs/editorjs';
 import Undo from 'editorjs-undo';
 window.Marker = require('@editorjs/marker');
@@ -44,6 +48,22 @@ window.Underline=require('@editorjs/underline');
 window.Hyperlink = require('editorjs-hyperlink');
 window.EditorJS=EditorJS;
 window.Undo=Undo;
+window.addEventListener('DOMContentLoaded',function(){
+    if (localStorage.theme_noteme === 'dark'||localStorage.theme_noteme !== undefined) {
+        document.querySelector('html').classList.add('dark');
+        document.querySelector('#checkbox').checked=true;
+    }
+    document.querySelector('#checkbox').addEventListener('change',function(value){
+        if(this.checked){
+            localStorage.theme_noteme='dark';
+            document.querySelector('html').classList.add('dark');
+        }else{
+            localStorage.removeItem('theme_noteme');
+            document.querySelector('html').classList.remove('dark');
+        }
+    });
+});
+
 import Calendar from 'v-calendar/lib/components/calendar.umd'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 
@@ -58,53 +78,5 @@ Vue.component('v-date-picker', DatePicker)
 import ClickOutside from 'vue-click-outside';
 const app = new Vue({
     el: '#app',
-
-    data(){
-        return {
-            isNav:false,
-        }
-    },
-    methods:{
-        toggle_Navbar() {
-
-            let btn = document.querySelector('.Logout');
-            console.log(btn);
-            if(btn) {
-                if (!this.isNav) {
-                    gsap.to('.Logout', {
-                        x: '0%',
-                        ease: 'back.out(1.2)'
-                    })
-                    gsap.to('.times',{
-                        rotation:90,
-                        transformOrigin:"center",
-                        ease:'power1.out'
-                    })
-                    this.isNav=true;
-                } else {
-                    this.hideNav();
-
-                }
-            }
-        },
-        hideNav:function() {
-            if (this.isNav) {
-                console.log('hide')
-                gsap.to('.Logout', {
-                    x: '100%',
-                    ease: 'back.in(1.2)',
-                })
-                gsap.to('.times', {
-                    rotation: 90,
-                    transformOrigin: "center",
-                    duration: 1.2,
-                })
-                this.isNav = false;
-            }
-        }
-    },
-    directives: {
-        ClickOutside
-    },
 
 });

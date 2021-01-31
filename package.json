@@ -23,11 +23,13 @@
         "editorjs-inline-image": "^0.1.1",
         "editorjs-undo": "^0.1.4",
         "jquery": "^3.5.1",
+        "laravel-echo": "^1.10.0",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.19",
         "popper.js": "^1.16.1",
         "postcss": "^7.0.35",
         "postcss-import": "^12.0.1",
+        "pusher-js": "^7.0.3",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
@@ -48,12 +50,17 @@
         "@editorjs/table": "^1.3.0",
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@simonwep/pickr": "^1.8.0",
+        "cannon-es": "^0.9.1",
         "editorjs-alert": "^1.0.3",
         "gsap": "^3.5.1",
+        "intro.js": "^3.2.1",
         "owl.carousel": "^2.3.4",
-        "three": "^0.124.0",
+        "smooth-scrollbar": "^8.5.3",
+        "three": "^0.115.0",
+        "three-to-cannon": "^3.1.0",
         "v-calendar": "^2.2.0",
         "vue": "^2.6.12",
-        "vue-click-outside": "^1.1.0"
+        "vue-click-outside": "^1.1.0",
+        "vue-skycons": "^4.0.3"
     }
 }

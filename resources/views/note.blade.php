@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.note_layout')
 @section('content')
       @if ($errors->any())
           <note-component errors="{{$errors}}"></note-component>

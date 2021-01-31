@@ -23,6 +23,8 @@ namespace App\Models{
  * @property int $finished
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note_Scheduler[] $schedules
+ * @property-read int|null $schedules_count
  * @method static \Illuminate\Database\Eloquent\Builder|Note newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Note newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Note query()
@@ -46,8 +48,8 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property int $note_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \datetime|null $created_at
+ * @property string|null $updated_at
  * @property-read \App\Models\Note $note
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Note_Scheduler newModelQuery()
@@ -67,6 +69,7 @@ namespace App\Models{
  * App\Models\Project
  *
  * @property int $id
+ * @property int $user_id
  * @property string $title
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -77,6 +80,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUserId($value)
  */
 	class Project extends \Eloquent {}
 }
@@ -97,6 +101,8 @@ namespace App\Models{
  * @property-read int|null $notes_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note_Scheduler[] $schedules
+ * @property-read int|null $schedules_count
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()

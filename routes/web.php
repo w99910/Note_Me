@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,46 +15,45 @@ use Illuminate\Support\Facades\App;
 if(env('APP_ENV')==='production'){
     \Illuminate\Support\Facades\URL::forceScheme('https');
 }
-Route::get('/{locale}',function($locale){
-    if (! in_array($locale, ['en', 'mm', 'es'])) {
-        abort(400);
-    }
-    App::setLocale($locale);
-    $localization=[
-          'login'=>__('messages.login'),
-          'signup'=>__('messages.sign-up'),
-        'about'=>__('messages.about'),
-        ];
-    return view('welcome_page',compact('localization','locale'));
-});
 
-Route::get('/', function () {
-    return redirect('/en');
-})->middleware('guest');
+Route::post('/set/locale',[App\Http\Controllers\General::class,'changeLocale']);
+Route::get('/dashboard',function(){
+      return view('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::post('/note/create/schedules',[App\Http\Controllers\NoteController::class,'createSchedule']);
 Route::post('/note/delete/schedules',[App\Http\Controllers\NoteController::class,'delete']);
 
 Route::get('/create_note',[App\Http\Controllers\NoteController::class,'CreateNote'])->name('create_note');
-Route::post('/create_note',[\App\Http\Controllers\NoteController::class,'create']);
-
-Route::post('/note_me_login',[App\Http\Controllers\General::class,'SignIn'])->name('login');
-Route::post('/note_me_register',[App\Http\Controllers\General::class,'SignUp'])->name('signUp');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::post('/create_note',[App\Http\Controllers\NoteController::class,'create']);
+Route::post('/delete/note',[App\Http\Controllers\NoteController::class,'delete']);
+Route::post('/note_me_login',[App\Http\Controllers\General::class,'SignIn'])->name('custom_login');
+Route::post('/note_me_register',[App\Http\Controllers\General::class,'SignUp'])->name('custom_signUp');
 
 Route::get('/note/{id}',[App\Http\Controllers\NoteController::class,'ViewNote']);
 
 Route::post('/user/notes',[App\Http\Controllers\NoteController::class,'notes']);
+Route::post('/schedules',[App\Http\Controllers\NoteController::class,'schedules']);
+Route::post('/trash',[App\Http\Controllers\NoteController::class,'trash']);
+Route::post('/trash/restore',[App\Http\Controllers\NoteController::class,'Restore']);
+
 Route::view('/calendar','calendar')->middleware('auth')->name('calendar');
 Route::view('wel','welcome_page');
+Route::get('/', function () {
+    $locale=Illuminate\Support\Facades\App::getLocale();
+    $localization=[
+        'login'=>__('messages.login'),
+        'signup'=>__('messages.sign-up'),
+        'about'=>__('messages.about'),
+    ];
+   return view('welcome_page',compact('locale','localization'));
+})->middleware('guest');
+
 
 require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/upload/image',function(\Illuminate\Http\Request $req){
    Log::info($req);

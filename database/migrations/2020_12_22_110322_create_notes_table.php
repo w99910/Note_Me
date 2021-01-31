@@ -21,6 +21,7 @@ class CreateNotesTable extends Migration
             $table->string('color')->default('#ffffff');
             $table->foreignId('project_id')->nullable()->constrained();
             $table->boolean('finished')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
