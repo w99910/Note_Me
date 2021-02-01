@@ -4,7 +4,7 @@
                 <div class="top-0 left-0 bg-transparent text-center w-1/2 flex items-center bg-yellow-300 text-white p-2"><i class="fas fa-info-circle mx-2"></i><span class="stroke-current">Click On the div to drop meshes</span></div>
 
             </div>
-            <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white">
+            <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white dark:bg-gray-200">
                 <span class="text-xl font-bold">Let's Rock and Roll :D</span>
                 <form :action="'/note_me_register'" method="post" class="w-full h-full">
                     <input type="hidden" name="_token" :value="csrf">
@@ -151,7 +151,6 @@ export default {
         camera1.lookAt(0,2,0)
 
         renderer1=new THREE.WebGLRenderer({antialias:true,alpha:1});
-        renderer1.setClearColor(0xffffff,1);
         renderer1.setSize(width,height);
         renderer1.outputEncoding = THREE.sRGBEncoding
 

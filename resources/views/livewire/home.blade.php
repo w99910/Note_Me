@@ -1,7 +1,7 @@
-<div class="w-full h-full grid grid-cols-2 sm:grid-cols-3 grid-rows-3 p-3 gap-2 overflow-auto ">
+<div class="w-full h-full dark:bg-gray-800 grid grid-cols-2 sm:grid-cols-3 grid-rows-3 p-3 gap-2 overflow-auto ">
     @if($notes!==null)
       @foreach($notes as $note)
-        <div class="flex border-gray-600 border-2 flex-col shadow-md text-dark-black z-30">
+        <div class="flex border-gray-600 dark:border-gray-200 border-2 flex-col shadow-md text-dark-black dark:text-gray-200 z-30">
             <div class="w-full h-4" style="background-color:{{$note->color}};"></div>
             <div class="w-full h-full p-3 flex flex-col">
             <div class="flex items-center justify-between border-none border-b-2"><p class="text-2xl font-bold blend-multiply">{{$note->title}}</p><button class="focus:outline-none" wire:click="viewNote({{$note->id}})"><i class="fas fa-ellipsis-v"></i></button></div>

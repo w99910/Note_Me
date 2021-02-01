@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 if(env('APP_ENV')==='production'){
     \Illuminate\Support\Facades\URL::forceScheme('https');
 }
-
+Route::get('/get/locale',function(){
+   \Illuminate\Support\Facades\App::setLocale('mm');
+   $data=resource_path();
+//   echo __('messages.login');
+    dd($data);
+});
 Route::post('/set/locale',[App\Http\Controllers\General::class,'changeLocale']);
-Route::get('/dashboard',function(){
-      return view('dashboard');
-})->middleware('auth')->name('dashboard');
+Route::get('/dashboard',[App\Http\Controllers\NoteController::class,'index'])->middleware('auth')->name('dashboard');
 
 Route::post('/note/create/schedules',[App\Http\Controllers\NoteController::class,'createSchedule']);
 Route::post('/note/delete/schedules',[App\Http\Controllers\NoteController::class,'delete']);
@@ -36,6 +39,8 @@ Route::post('/user/notes',[App\Http\Controllers\NoteController::class,'notes']);
 Route::post('/schedules',[App\Http\Controllers\NoteController::class,'schedules']);
 Route::post('/trash',[App\Http\Controllers\NoteController::class,'trash']);
 Route::post('/trash/restore',[App\Http\Controllers\NoteController::class,'Restore']);
+Route::post('/trash/delete',[App\Http\Controllers\NoteController::class,'deleteTrash']);
+Route::post('/delete/all',[App\Http\Controllers\NoteController::class,'deleteAll']);
 
 Route::view('/calendar','calendar')->middleware('auth')->name('calendar');
 Route::view('wel','welcome_page');

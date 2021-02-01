@@ -5,6 +5,9 @@ module.exports = {
     purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
     theme: {
         extend: {
+            padding:{
+              'small':'0.15rem',
+            },
             height:{
               '1/10':'10%',
               '2/10':'20%',
@@ -24,6 +27,7 @@ module.exports = {
                 poppins:['Poppins']
             },
             colors:{
+                blur:'rgba(0,0,0,0.6)',
                 primary:'#FAE8AD',
                 secondary:'#717171',
                 dark:{

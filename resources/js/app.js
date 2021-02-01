@@ -35,6 +35,10 @@ Vue.component('quote',require('./components/small-components/Quote').default);
 Vue.component('tiny-calendar',require('./components/small-components/tiny-calendar').default);
 import EditorJS from '@editorjs/editorjs';
 import Undo from 'editorjs-undo';
+import introJs from 'intro.js';
+import "intro.js/minified/introjs.min.css";
+
+window.introJs=introJs;
 window.Marker = require('@editorjs/marker');
 window.Paragraph=require('@editorjs/paragraph');
 window.list=require('@editorjs/list');
@@ -52,6 +56,17 @@ window.addEventListener('DOMContentLoaded',function(){
     if (localStorage.theme_noteme === 'dark'||localStorage.theme_noteme !== undefined) {
         document.querySelector('html').classList.add('dark');
         document.querySelector('#checkbox').checked=true;
+        if(document.querySelector('#video1')!==null){
+           let video1= document.querySelector('#video1')
+           let video2= document.querySelector('#video2')
+
+                video2.classList.remove('z-0')
+                video2.classList.add('z-10');
+
+               video1.classList.remove('z-10')
+                video1.classList.add('z-0');
+
+        }
     }
     document.querySelector('#checkbox').addEventListener('change',function(value){
         if(this.checked){

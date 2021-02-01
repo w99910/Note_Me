@@ -1,5 +1,5 @@
 <template>
-     <div class="w-full relative h-full bg-dark-red font-poppins border-2 border-white px-2 py-1 flex flex-col">
+     <div class="quote-intro w-full relative h-full bg-dark-red font-poppins border-2 border-white dark:border-gray-200 px-2 py-1 flex flex-col">
           <h1 class="text-lg font-poppins font-bold text-gray-100">{{quote.title}}</h1>
          <p class="text-dark-yellow"><i class="fas fa-quote-left text-sm text-white"></i> {{quote.quote}} <i class="fas fa-quote-right text-sm text-white"></i><span class="text-white"> - {{quote.author}}</span>
          </p>
@@ -8,6 +8,7 @@
 </template>
 
 <script>
+let introHome;
 export default {
 name: "Quote",
     data(){
@@ -35,6 +36,7 @@ name: "Quote",
         })
     },
     mounted() {
+
 
     }
 

@@ -59,20 +59,23 @@
             background-color:#092c3e;
             /*background-image: url("/images/sun_1.png");*/
         }
+        .customTooltip * {
+            font-family: "Poppins" !important;
+        }
     </style>
 </head>
 <body>
-<div id="app" class="h-screen w-screen bg-dark-black font-lora flex flex-col">
-    <div class="nav bg-white dark:bg-dark-black border-b-2 border-gray-600 px-4 py-1 w-full">
+<div id="app" class="h-screen w-screen bg-dark-black font-poppins flex flex-col">
+    <div class="nav bg-white dark:bg-gray-700 border-b-2 dark:border-gray-200 border-gray-600 px-4 py-1 w-full">
         <div class="flex items-center justify-between w-full">
-            <h1 class="text-3xl text-title font-bowlby add_stroke">Note Me</h1>
-            <div class="flex justify-between items-center w-5/12 text-dark-black">
-                <a href="{{route('create_note')}}" class="bg-green-400 border-2 border-gray-500 text-white px-2 py-1 text-sm">Create New Note</a>
+            <h1 class="text-3xl text-title dark:text-gray-100 font-bowlby add_stroke">Note Me</h1>
+            <div class="flex justify-between items-center w-5/12 text-dark-black dark:text-gray-200">
+                <a href="{{route('create_note')}}" class="bg-green-400 dark:bg-about border-2 border-gray-500 dark:border-gray-200 text-white px-2 py-1 text-sm">Create New Note</a>
                 <div class="w-1/2 flex items-center justify-evenly">
                     <div class="flex items-center py-2">
                         <label class="flex items-center justify-center px-2 py-1">
-                            <img src="{{asset('images/translate.png')}}" class="w-12 h-12" alt="translate">
-                            <select class="border-none focus:outline-none focus:ring-0">
+                            <img src="{{secure_asset('images/translate.png')}}" class="w-12 h-12" alt="translate">
+                            <select class="border-none focus:outline-none focus:ring-0 dark:bg-transparent">
                                 <option value="en"><a href="">en</a></option>
                                 <option value="mm"><a href="">mm</a></option>
                                 <option>es</option>
@@ -92,18 +95,19 @@
         </div>
     </div>
     <div class="w-full overflow-auto h-full flex">
-        <div class="w-20 flex flex-col justify-between text-3xl items-center h-full">
+        <div class="w-20 flex dark:bg-gray-900 flex-col justify-between text-3xl items-center h-full">
             <div class="h-3/5 w-full flex flex-col justify-around items-center">
                 <a href="{{route('dashboard')}}"><i class="fas fa-sticky-note text-dark-blue"></i></a>
                 <i class="fas fa-user text-dark-purple"></i>
                 {{--                <a href="{{route('create_note')}}"><i class="fas fa-plus-circle text-3xl sm:text-5xl text-white"></i></a>--}}
                 <a href="{{route('calendar')}}"> <i class="far fa-calendar-alt text-dark-yellow"></i></a>
                 <i class="fas fa-address-card text-dark-red"></i>
+                <i class="help cursor-pointer fas fa-exclamation-circle text-dark-yellow"></i>
             </div>
             <div class="mb-4">
                 <form method="POST" action="{{route('logout')}}">
                     @csrf
-                    <button type="submit" class="focus:outline-none"><img src="{{asset('images/logout.png')}}" class="w-8"></button>
+                    <button type="submit" class="focus:outline-none"><img src="{{secure_asset('images/logout.png')}}" class="w-8"></button>
                 </form>
             </div>
         </div>

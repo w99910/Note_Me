@@ -3,7 +3,7 @@
         <div class="w-1/2 h-full relative" id="animation_text">
             <div class="top-0 left-0 bg-transparent text-center w-1/2 flex items-center bg-yellow-300 text-white p-2"><i class="fas fa-info-circle mx-2"></i><span class="stroke-current">Click On the div to drop meshes</span></div>
         </div>
-        <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white">
+        <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white dark:bg-gray-200">
             <span class="text-xl font-bold">Let's Rock and Roll :D</span>
             <form :action="'/note_me_login'" method="post" class="w-full h-full">
                 <input type="hidden" name="_token" :value="csrf">
@@ -124,7 +124,7 @@ name: "Login_Form",
         camera.lookAt(0,1,0)
 
         renderer=new THREE.WebGLRenderer({antialias:true,alpha:1});
-        renderer.setClearColor(0xffffff,1);
+        // renderer.setClearColor(0xffffff,0);
         renderer.setSize(width,height);
         renderer.outputEncoding = THREE.sRGBEncoding
 

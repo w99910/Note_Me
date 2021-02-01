@@ -2,37 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09965a13-2bda-4aad-8146-bd0bfdba9769" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Note_Me.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Note_Me.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_ide_helper_models.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper_models.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/General.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/General.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Note.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Note.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_22_110322_create_notes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_22_110322_create_notes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Guest_Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Guest_Form.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Calendar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Landing_Page.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Landing_Page.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Login_Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Login_Form.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Note_Component.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Note_Component.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/toast.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/toast.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/SignUp_Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/SignUp_Form.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/small-components/Quote.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/small-components/Quote.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/small-components/Weather.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/small-components/Weather.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/small-components/tiny-calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/small-components/tiny-calendar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/small-components/trash.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/small-components/trash.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/mm/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/mm/messages.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/calendar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/calendar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/guest_layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/guest_layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/note_layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/note_layout.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/livewire/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/note.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/note.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome_page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome_page.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
@@ -209,6 +201,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Qualify-Test/resources/js/components/Home.vue" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -314,7 +307,9 @@
       <workItem from="1611977206986" duration="16158000" />
       <workItem from="1612003562549" duration="146000" />
       <workItem from="1612003859212" duration="18445000" />
-      <workItem from="1612061651733" duration="30191000" />
+      <workItem from="1612061651733" duration="31045000" />
+      <workItem from="1612146240210" duration="31073000" />
+      <workItem from="1612185781548" duration="9726000" />
     </task>
     <servers />
   </component>

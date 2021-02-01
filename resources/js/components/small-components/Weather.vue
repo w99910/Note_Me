@@ -1,8 +1,8 @@
 <template>
-         <div class="w-full h-full bg-about flex justify-evenly items-center border-2 border-white">
+         <div class="weather-intro-1 w-full h-full bg-about flex justify-evenly items-center border-2 border-white dark:border-gray-200">
              <Sky v-if="render" :condition="weather.condition" :color="weather.color" size="46" :key="forceKey" ref="skyIcon"></Sky>
              <div class="flex flex-col p-2 justify-center">
-                  <div class="flex justify-between w-full">
+                  <div class="weather-intro-2 flex justify-between w-full">
                       <input class="ring-0 focus:ring-0 p-0 text-lg focus:outline-none add_stroke_white text-dark-black font-bowlby border-none w-36 bg-transparent" type="text" v-model="weather.city" />
                   </div>
                  <span class="add_stroke_white text-dark-black font-bowlby text-xl">{{weather.temperature}} °C</span>
@@ -111,7 +111,7 @@ export default {
         })
     },
     mounted(){
-           // console.log(this.weather);
+
 
     },
 }

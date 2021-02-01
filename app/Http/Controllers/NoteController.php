@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Note;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -15,6 +16,11 @@ class NoteController extends Controller
 
     public function __construct(){
         $this->middleware('auth');
+    }
+    public function index(){
+        App::setLocale('en');
+        $localization=[];
+        return view('dashboard',compact('localization'));
     }
     public function create(Request $req){
 
@@ -44,7 +50,7 @@ class NoteController extends Controller
             $note=Note::find($req->id);
             if($note->user_id===Auth::id()){
                 $note->delete();
-                return redirect()->route('dashboard');
+                return route('dashboard');
             }
             return response()->json('Error');
     }
@@ -89,5 +95,23 @@ class NoteController extends Controller
                return response()->json($e);
            }
 
+    }
+    public function deleteAll(){
+               $notes=Auth::user()->trashes;
+               if(!empty($notes)){
+                   foreach ($notes as $note){
+                       $note->forceDelete();
+                   }
+                   return response()->json('Success');
+               }
+               return response()->json('Cannot');
+    }
+    public function deleteTrash(Request $req){
+            $note=Note::find($req->id);
+            if($note->user_id === Auth::id()){
+                $note->forceDelete();
+                return response()->json('Success');
+            }
+        return response()->json('Cannot');
     }
 }

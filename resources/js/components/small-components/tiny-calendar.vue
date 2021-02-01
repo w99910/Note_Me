@@ -1,5 +1,5 @@
 <template>
-<div class="w-full h-full flex flex-col justify-between items-center border-none relative">
+<div class="calendar-intro w-full h-full flex flex-col justify-between items-center border-none relative">
      <span class="text-lg font-poppins font-bold text-gray-100">Scheduled Notes</span>
     <v-calendar is-expanded :theme="theme" :attributes="attributes" :is-dark="isDark"></v-calendar>
 </div>
@@ -24,7 +24,9 @@ export default {
 
     },
     created(){
-        this.isDark=!(document.querySelector('#checkbox').checked);
+        if (localStorage.theme_noteme === 'dark'||localStorage.theme_noteme !== undefined) {
+        this.isDark=true;
+        }
         axios.post('schedules').then((res)=>{
 
                 if(res.data.length!==0) {
@@ -70,6 +72,6 @@ export default {
 
 <style scoped>
    >>>.vc-container{
-       border:2px solid white !important;
+       border:2px solid #f3f3f3 !important;
    }
 </style>

@@ -46,14 +46,10 @@ class General extends Controller
     }
     public function changeLocale(Request $req){
         if(!in_array($req->value,['en','mm','es'])){
-            abort(400);
+            return response()->json('Error',400);
         }
         App::setLocale($req->value);
-        $localization=[
-            'login'=>__('messages.login'),
-            'signup'=>__('messages.sign-up'),
-            'about'=>__('messages.about'),
-        ];
-        return response()->json($localization);
+      return response()->json(App::getLocale(),200);
+
     }
 }

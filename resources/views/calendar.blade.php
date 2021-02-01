@@ -1,4 +1,4 @@
 @extends('layouts.note_layout')
 @section('content')
-    <calendar></calendar>
+    <calendar url="{{url('/')}}"></calendar>
 @endsection
