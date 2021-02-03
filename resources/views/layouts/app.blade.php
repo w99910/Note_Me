@@ -61,6 +61,10 @@
         .customTooltip * {
             font-family: "Poppins" !important;
         }
+        .note_container::-webkit-scrollbar{
+            background: transparent;
+            width:0px;
+        }
 
     </style>
 </head>
@@ -70,16 +74,16 @@
             <div class="flex items-center justify-between w-7/12">
             <h1 class="text-3xl text-title font-bowlby dark:text-gray-100 add_stroke">Note Me</h1>
             <div class="flex justify-between items-center w-8/12 text-dark-black dark:text-gray-200">
-                <a href="{{route('create_note')}}" class="create-note-intro bg-green-400 dark:bg-about border-2 border-gray-500 dark:border-gray-200 text-white px-2 py-1 text-sm">{{ __('messages.login') }}</a>
+                <a href="{{route('create_note')}}" class="create-note-intro bg-green-400 dark:bg-about border-2 border-gray-500 dark:border-gray-200 text-white px-2 py-1 text-sm">{{ __('messages.create_new_note') }}</a>
                 <div class="w-1/2 flex items-center justify-evenly">
                     <div class="flex items-center py-2">
                         <label class="flex items-center justify-center px-2 py-1">
-                            <img src="{{secure_asset('images/translate.png')}}" class="w-12 h-12" alt="translate">
-                            <select class="locale-intro border-none focus:outline-none focus:ring-0 dark:bg-transparent">
-                                <option value="en">en</option>
-                                <option value="mm">mm</option>
-                                <option value="es">es</option>
-                                <option value="jpn">jpn</option>
+                            <img src="{{secure_asset('images/translate.png')}}" class="w-8 h-8" alt="translate">
+                            <select class="locale-intro border-none focus:outline-none  focus:ring-0 dark:bg-transparent">
+                                <option value="en" class="dark:text-dark-black">en</option>
+                                <option value="mm" class="dark:text-dark-black">mm</option>
+                                <option value="es" class="dark:text-dark-black">es</option>
+                                <option value="jpn" class="dark:text-dark-black">jpn</option>
                             </select>
                         </label>
                     </div>

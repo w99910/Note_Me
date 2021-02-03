@@ -5,11 +5,11 @@
 
             </div>
             <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white dark:bg-gray-200">
-                <span class="text-xl font-bold">Let's Rock and Roll :D</span>
+                <span class="text-xl font-bold">{{ messages.intro_signup }}</span>
                 <form :action="'/note_me_register'" method="post" class="w-full h-full">
                     <input type="hidden" name="_token" :value="csrf">
                     <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
-                        <div class="flex justify-start items-center w-full"><label for="name" class="w-3/12 flex">Name:</label>
+                        <div class="flex justify-start items-center w-full"><label for="name" class="w-3/12 flex">{{ messages.name }}</label>
                             <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
                                 <input id="name" name="name" class="border-none focus:ring-0 text-gray-800 rounded-full py-1 px-2 w-full" type="text" v-model="name">
                             </div>
@@ -17,7 +17,7 @@
                         <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="nameError!==null"><span>{{nameError}}</span></span>
                     </div>
                     <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
-                        <div class="flex justify-start items-center w-full"><label for="email1" class="w-3/12 flex">Email:</label>
+                        <div class="flex justify-start items-center w-full"><label for="email1" class="w-3/12 flex">{{ messages.email }}</label>
                             <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
                                 <input id="email1" name="email1" class="text-gray-800 rounded-full focus:ring-0 border-none py-1 px-2 w-full" type="text" v-model="email" required>
                             </div>
@@ -25,17 +25,17 @@
                         <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidMail"><span>Please enter valid email.</span></span>
                     </div>
                     <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
-                        <div class="flex justify-start items-center w-full"><label for="password1" class="w-3/12 flex">Password:</label>
-                            <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
-                                <input id="password1" name="password1" class="text-gray-800 rounded-full focus:ring-0 border-none py-1 px-2 w-full" type="password" v-model="password" required>
-                                <i class="fas fa-eye" @click="togglePass"></i>
+                        <div class="flex justify-start items-center w-full"><label for="password1" class="w-3/12 flex">{{ messages.password }}</label>
+                            <div class="flex w-9/12 items-center justify-center bg-white rounded-full border pr-2 border-2">
+                                <input id="password1" name="password1" class="text-gray-800 rounded-full focus:ring-0 border-none py-1 px-2 w-full" type="password" v-model="password" required/> <i class="fas fa-eye cursor-pointer" @click="togglePass"></i>
                             </div>
                         </div>
                         <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidPassword" ><span>Password Field is required.</span></span>
 
                     </div>
                     <div class="w-full flex items-center justify-end mt-1 sm:mt-4">
-                        <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;">Sign Up</button>
+                        <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;">
+                            {{ messages.sign_up }}</button>
                     </div>
                 </form>
             </div>
@@ -53,7 +53,7 @@ let scene1,camera1,renderer1,hemisphere_light1,obj1,container1,controls1,raycast
 
 export default {
     name: "SignUp_Form",
-    props:['csrf','locale'],
+    props:['csrf','locale','messages'],
     data(){
         return {
             name:'',

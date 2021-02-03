@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SupportMail;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
@@ -10,6 +11,23 @@ use Illuminate\Support\Facades\Hash;
 
 class General extends Controller
 {
+    public function index(){
+        if(\Session::has('locale')){
+           App::setLocale(\Session::get('locale'));
+        }
+        $locale=App::getLocale();
+        $localization=__('messages');
+//    dd(Session::get('locale'),$locale);
+        return view('welcome_page',compact('localization','locale'));
+    }
+    public function calendar(){
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
+        $locale=App::getLocale();
+        $localization=collect(__('messages' ))->toJson();
+        return view('calendar',compact('locale','localization'));
+    }
     public function SignIn(Request $req){
 
         $validator=\Validator::make($req->only('email','password'),[
@@ -45,11 +63,19 @@ class General extends Controller
         return back()->withErrors(['email'=>'Something went wrong. Please Try again.']);
     }
     public function changeLocale(Request $req){
-        if(!in_array($req->value,['en','mm','es'])){
+        $locale=$req->value;
+        if(!in_array($locale,['en','mm','es','jpn'])){
             return response()->json('Error',400);
         }
-        App::setLocale($req->value);
-      return response()->json(App::getLocale(),200);
+        \Session::put('locale', $locale);
+        App::setLocale($locale);
+         $files=__('messages');
+      return response()->json($files,200);
 
     }
+    public function sendMail(Request $req){
+        \Illuminate\Support\Facades\Mail::to('testlesson2019@gmail.com')->send(new SupportMail($req->name,$req->title,$req->email,$req->contents));
+          return 'success';
+    }
+
 }

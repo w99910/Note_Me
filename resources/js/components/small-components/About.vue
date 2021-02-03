@@ -1,32 +1,28 @@
 <template>
-    <div class="w-full h-full flex">
+    <div class="w-full h-full flex absolute top-0 left-0">
         <div class="w-1/2 h-full flex items-center justify-center p-3">
             <img :src="url+'/images/note_me_04.png'" class="w-full" alt="">
         </div>
-        <div class="flex flex-col h-full items-center p-3 w-1/2">
-            <h2 class="text-about text-xl">{{ messages.about }}</h2>
+        <div class="flex flex-col h-full justify-center items-center p-3 w-1/2">
+            <h2 class="text-about text-xl mb-2 sm:mb-5 font-bold">{{ messages.about }}</h2>
             <ul class="flex flex-col h-4/6 justify-evenly list-disc">
                 <li>
-                    <h1 class="font-bold">What is Note Me?</h1>
-                    <p>Note Me is a SaaS app in which you can
-                        create your own notes, schedule your tasks,
-                        let note me notify you with email or desktop
-                        notification browse your notes on any device's
-                        web browsers.</p>
+                    <h1 class="font-bold">{{ messages.What_is_Note_Me }}</h1>
+                    <p>{{ messages.what_list_1}}</p>
                 </li>
                 <li>
-                    <h1 class="font-bold">How is Note Me created?</h1>
-                    <p>Note Me is created with Laravel PHP framework, Vue Js framework,TailWind CSS
-                        framework,
-                        and Editor js library, v-calendar library, three js.</p>
+                    <h1 class="font-bold">{{ messages.How_is_Note_Me_created }}</h1>
+                    <p>{{
+                            messages.what_list_2
+                        }}</p>
                 </li>
                 <li>
-                    <h1 class="font-bold">Why is Note Me created?</h1>
+                    <h1 class="font-bold">{{ messages.Why_is_Note_Me_created }}</h1>
                     <p>
-                        - To make everyone complete their daily tasks easily by planning or arranging with Note Me.
+                        - {{ messages.expect_list_1}}
                     </p>
                     <p>
-                        - To be completely free Note-Maker Website.
+                        - {{ messages.expect_list_2 }}
                     </p>
 
                 </li>

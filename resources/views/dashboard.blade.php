@@ -5,7 +5,7 @@
     @enderror
     <div class="border-l-2 border-gray-600 flex bg-white w-full h-full">
         <div class="w-7/12 h-full"> @livewire('home')</div>
-        <note url="{{url('/')}}" token="{{csrf_token()}}"></note>
+        <note url="{{url('/')}}" token="{{csrf_token()}}" locale="{{$locale}}" messages="{{$localization}}"></note>
 
     </div>
 @endsection

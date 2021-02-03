@@ -1,8 +1,8 @@
 <template>
-    <div class="trash-intro flex flex-col px-2 py-1 w-full h-full border-2 overflow-hidden border-white dark:border-gray-200">
+    <div class="trash-intro flex flex-col px-2 py-1 w-full h-full border-2 overflow-hidden border-gray-800 dark:border-gray-200">
         <div class="justify-between flex">
-            <h1 class="text-lg font-bold text-gray-100 font-poppins">Trash Bin</h1>
-            <button class="focus:outline-none p-1 text-gray-100 text-md font-poppins" @click="deleteAll()">Delete all</button>
+            <h1 class="text-lg font-bold text-gray-100 font-poppins">{{messages.Trash_Bin}}</h1>
+            <button class="focus:outline-none p-1 text-gray-100 text-md font-poppins" @click="deleteAll()">{{messages.Delete_all}}</button>
         </div>
         <div class="flex flex-col relative overflow-hidden justify-center items-center overflow-auto h-full">
             <div class="absolute top-0 left-0 w-full h-full z-10 bg-secondary flex items-center justify-center"
@@ -20,10 +20,10 @@
                     </div>
                    <div class="flex items-center">
                        <button class="px-2 h-full mx-2 py-1 focus:outline-none border-2 border-gray-500 bg-dark-yellow"
-                               @click="deleteTrash(trash)">Delete
+                               @click="deleteTrash(trash)">{{messages.Delete}}
                        </button>
                        <button class="px-2 h-full py-1 focus:outline-none border-2 border-gray-500 bg-dark-yellow"
-                               @click="recycle(trash.id)">Recycle
+                               @click="recycle(trash.id)">{{messages.restore_item}}
                        </button>
                    </div>
                 </div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="flex flex-col items-center justify-between" v-show="trashes.length === 0">
-                <span class="font-poppins text-gray-100 text-md font-bold">There is no items in your trash</span>
+                <span class="font-poppins text-gray-100 text-md font-bold">{{messages.There_is_no_item_in_your_trash}}</span>
                 <img :src="url+'/images/trash.png'" class="w-6 mt-2">
             </div>
         </div>
@@ -43,7 +43,7 @@
 <script>
 export default {
     name: "trash",
-    props: ['url', 'token'],
+    props: ['url', 'token','messages'],
     data() {
         return {
             trashes: [],
@@ -85,15 +85,20 @@ export default {
             }
         },
         deleteAll(){
-            if(confirm('Are you sure?')){
-                this.loading=true;
-                axios.post('/delete/all').then((res)=>{
+            if(this.trashes.length!==0){
+            if(confirm('Are you sure?')) {
+                this.loading = true;
+                axios.post('/delete/all').then((res) => {
                     console.log(res);
-                    if(res.status === 200){
+                    if (res.status === 200) {
                         this.trashes = [];
                     }
-                    this.loading=false;
+                    this.loading = false;
                 })
+            }
+            }else{
+                this.message="You can't delete empty";
+                this.showToast=true;
             }
         }
     },

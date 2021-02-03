@@ -17,10 +17,14 @@ if(env('APP_ENV')==='production'){
 }
 Route::get('/get/locale',function(){
    \Illuminate\Support\Facades\App::setLocale('mm');
-   $data=resource_path();
-//   echo __('messages.login');
-    dd($data);
+          $file=__('messages');
+    dd($file);
 });
+Route::get('/mailable', function () {
+    \Illuminate\Support\Facades\Mail::to('testlesson2019@gmail.com')->send(new App\Mail\SupportMail('zaw','lin','zaw@mail','content'));
+//    return new App\Mail\SupportMail('zaw','lin','zaw@mail','content');
+});
+Route::post('/send/mail',[App\Http\Controllers\General::class,'sendMail']);
 Route::post('/set/locale',[App\Http\Controllers\General::class,'changeLocale']);
 Route::get('/dashboard',[App\Http\Controllers\NoteController::class,'index'])->middleware('auth')->name('dashboard');
 
@@ -42,27 +46,10 @@ Route::post('/trash/restore',[App\Http\Controllers\NoteController::class,'Restor
 Route::post('/trash/delete',[App\Http\Controllers\NoteController::class,'deleteTrash']);
 Route::post('/delete/all',[App\Http\Controllers\NoteController::class,'deleteAll']);
 
-Route::view('/calendar','calendar')->middleware('auth')->name('calendar');
-Route::view('wel','welcome_page');
-Route::get('/', function () {
-    $locale=Illuminate\Support\Facades\App::getLocale();
-    $localization=[
-        'login'=>__('messages.login'),
-        'signup'=>__('messages.sign-up'),
-        'about'=>__('messages.about'),
-    ];
-   return view('welcome_page',compact('locale','localization'));
-})->middleware('guest');
+Route::get('/calendar',[App\Http\Controllers\General::class,'calendar'])->middleware('auth')->name('calendar');
+Route::get('/', [App\Http\Controllers\General::class,'index'])->middleware('guest');
 
 
 require __DIR__.'/auth.php';
 
 Auth::routes();
-
-
-Route::post('/upload/image',function(\Illuminate\Http\Request $req){
-   Log::info($req);
-});
-Route::post('/upload/url',function(\Illuminate\Http\Request $req){
-    Log::info($req);
-});

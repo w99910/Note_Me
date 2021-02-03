@@ -4,17 +4,17 @@
             <div class="w-full h-full border-2 border-gray-700 flex flex-col bg-secondary dark:bg-gray-700">
                 <div class="w-full flex justify-between items-center">
                     <div class="w-6/12 h-full p-1">
-                        <weather></weather>
+                        <weather :messages="decoded_messages"></weather>
                     </div>
                     <div class="w-6/12 h-full p-1">
-                        <tiny-calendar></tiny-calendar>
+                        <tiny-calendar :messages="decoded_messages"></tiny-calendar>
                     </div>
                 </div>
                 <div class="w-full h-2/6 flex items-center p-1">
-                    <trash :url="url" :token="token"></trash>
+                    <trash :url="url" :token="token" :messages="decoded_messages"></trash>
                 </div>
                 <div class="w-full flex-1 flex p-1">
-                    <quote></quote>
+                    <quote :messages="decoded_messages"></quote>
                 </div>
             </div>
         </div>
@@ -23,25 +23,31 @@
 
 <script>
 let introHome;
+import Scrollbar from 'smooth-scrollbar';
 export default {
 name: "Note",
-    props:['url','token'],
+    props:['url','token','locale','messages'],
+    computed:{
+        decoded_messages(){
+            return JSON.parse(this.messages);
+        }
+    },
     methods:{
        watchLocale(){
            let element=document.querySelector('.locale-intro');
-           // element.value='mm'
+           element.value=this.locale;
            document.querySelector('.locale-intro').addEventListener('change',function(){
                axios.post('/set/locale',{value:this.value}).then((res)=>{
                    console.log(res.data);
                    if(res.status === 200){
-
-                       // window.location.reload(false);
+                       window.location.reload(false);
                    }
                })
            })
        },
        info(){
            window.addEventListener('DOMContentLoaded',function(){
+               // Scrollbar.init(document.querySelector('.note_container'))
                introHome=new introJs().setOptions({
                    tooltipClass:'customTooltip',
                    steps:[
@@ -77,6 +83,10 @@ name: "Note",
                        {
                            element:document.querySelector('.locale-intro'),
                            intro:'Change Language of Website.',
+                       },
+                       {
+                           element:document.querySelector('.first_note'),
+                           intro:'Click to view the note',
                        },
                        {
                            element:document.querySelector('.create-note-intro'),

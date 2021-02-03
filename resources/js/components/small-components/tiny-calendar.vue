@@ -1,6 +1,6 @@
 <template>
 <div class="calendar-intro w-full h-full flex flex-col justify-between items-center border-none relative">
-     <span class="text-lg font-poppins font-bold text-gray-100">Scheduled Notes</span>
+     <span class="text-lg font-poppins font-bold text-gray-100">{{ messages.Scheduled_Notes}}</span>
     <v-calendar is-expanded :theme="theme" :attributes="attributes" :is-dark="isDark"></v-calendar>
 </div>
 </template>
@@ -8,6 +8,8 @@
 <script>
 export default {
     name: "tiny-calendar",
+    props:['messages'],
+
     data(){
         return{
             theme: {

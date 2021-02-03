@@ -20,6 +20,11 @@ module.exports = {
               '9/10':'90%',
               '10/10':'100%',
             },
+            zIndex:{
+                '120':120,
+                '150':150,
+                '200':200,
+            },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 lora:['Lora'],

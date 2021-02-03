@@ -1,7 +1,7 @@
 <template>
-    <div v-show="start!==null" class="p-3 border-2 border-gray-600 bg-dark-yellow toast sm:w-3/12 h-14 fixed top-0 right-0 flex items-center z-50 m-4 bg-white text-black justify-evenly text-center">
+    <div v-show="start!==null" class="p-3 border-2 border-gray-600 bg-dark-yellow toast sm:w-3/12 h-16 fixed top-0 right-0 flex items-center z-200 m-4 bg-white text-black justify-evenly text-center">
          <span><i class="fas fa-info-circle mx-2 text-white"></i></span>
-        <div>{{message}}</div>
+        <div class="w-full flex">{{message}}</div>
     </div>
 </template>
 
@@ -14,8 +14,8 @@ export default {
             required:true,
         },
         'time':{
-            required:true,
             default:1,
+            required:true,
         },
         'start':{
             default:null,

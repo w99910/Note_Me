@@ -3,8 +3,8 @@
         <div  class="w-8/12 h-full flex flex-col p-4 border-2 border-gray-600 dark:border-gray-200  mt-2 " :style="{backgroundColor:custom_color}">
             <div class="w-full mb-1 flex items-center justify-evenly">
                 <label class="w-9/12">
-                    <input v-model.lazy="title" placeholder="Enter Awesome Title" id="step-1"
-                           class="w-full focus:outline-none border-b-2 bg-transparent py-1 dark:text-gray-200">
+                    <input v-model.lazy="title" :placeholder="messages.title" id="step-1"
+                           class="w-full focus:outline-none border-b-2 bg-transparent py-1 dark:text-gray-400">
                 </label>
                 <div class="p-2 bg-gray-400 ml-2" id="step-2">
                     <div class="color-picker" ></div>
@@ -12,18 +12,18 @@
 
             </div>
 
-            <div class="step-3 w-full p-2 overflow-auto dark:text-gray-50" id="editorjs"></div>
+            <div class="step-3 w-full p-2 overflow-auto dark:text-gray-400" id="editorjs"></div>
             <!--        <input type="hidden" value="{{csrf}}" name="_token" id="csrf_token">-->
         </div>
         <div class="w-3/12 flex flex-col h-full justify-between overflow-hidden">
         <div class="flex h-6/10 w-full flex-col mt-3 p-2 border-2 shadow-lg border-gray-600 dark:border-gray-200 overflow-hidden dark:bg-gray-700">
             <div class="flex items-center justify-around mb-2 py-3 w-full">
-                <button class="px-3 py-1 bg-green-500 text-white focus:outline-none" @click="save()"><span
-                        v-text="note!==''?'Save':'Create'" id="step-5"></span></button>
-                <button v-if="note!==null" class="px-3 py-1 bg-dark-red text-white focus:outline-none" v-show="note!==''" @click="deleteNote()"><span>Delete</span></button>
+                <button class="bg-green-500 text-white focus:outline-none" :class="locale==='mm'?'p-1 py-2':'px-3 py-1 '" @click="save()"><span
+                        v-text="note!==''?messages.Save:messages.Create" id="step-5"></span></button>
+                <button v-if="note!==null" class="bg-dark-red text-white focus:outline-none" :class="locale==='mm'?'p-1 py-2':'px-3 py-1 '" v-show="note!==''" @click="deleteNote()"><span>{{ messages.Delete }}</span></button>
                 <button class="text-sm text-indigo-600 dark:text-blue-100 font-semibold hover:text-indigo-500 px-2 h-8 focus:outline-none"
                         @click.stop="addDate" id="step-4">
-                    + Add Date
+                    + {{ messages.Add_Date }}
                 </button>
             </div>
             <v-date-picker v-model="selected.date" updateValue>
@@ -86,7 +86,7 @@ class MyHeader extends Header {
 let editor,pickr,intro;
 export default {
     name: "Note_Component",
-    props: ['errors', 'note', 'csrf', 'readonly', 'url'],
+    props: ['errors', 'note', 'csrf', 'readonly', 'url','localization','locale'],
     data() {
         return {
             loading:false,
@@ -97,6 +97,7 @@ export default {
             custom_color: this.note !== '' ? JSON.parse(this.note).color : '#ffffff',
             showToast:false,
             error_message:'',
+            messages:JSON.parse(this.localization),
         }
     },
     watch: {
@@ -158,6 +159,18 @@ export default {
             let year = a.getFullYear();
             return `${year}-${month + 1}-${day}`;
         },
+        watchAndChangeLocale(){
+            let element=document.querySelector('.locale-intro');
+            element.value=this.locale;
+            document.querySelector('.locale-intro').addEventListener('change',function(){
+                axios.post('/set/locale',{value:this.value}).then((res)=>{
+                    console.log(res.data);
+                    if(res.status === 200){
+                        window.location.reload(false);
+                    }
+                })
+            })
+        },
         save() {
             if(this.title.trim().length ===0){
                 this.error_message='Title cannot be empty!';
@@ -187,6 +200,7 @@ export default {
         },
     },
     mounted() {
+        this.watchAndChangeLocale();
         intro=new introJs().setOptions({
             tooltipClass:'customTooltip',
            steps:[

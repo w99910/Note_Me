@@ -45,6 +45,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class);
     }
+    public function sortNoteByAsc()
+    {
+            return $this->hasMany(Note::class)->orderBy('created_at','asc');
+    }
+    public function sortNoteByDesc()
+    {
+            return $this->hasMany(Note::class)->orderBy('created_at','desc');
+    }
     public function schedules()
     {
         return $this->hasMany(Note_Scheduler::class);

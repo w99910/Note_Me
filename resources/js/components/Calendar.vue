@@ -28,7 +28,7 @@
                 <a :href="url+'/note/'+schedule.note.id" class="px-2 py-1 bg-dark-yellow dark:bg-yellow-500">Edit</a>
              </div>
             </div>
-            <div class="flex w-full items-center flex-1 dark:text-gray-100 bg-primary relative overflow-hidden px-2 py-1 dark:bg-gray-700" id="editor_container">
+            <div class="flex w-full items-center flex-1 dark:text-gray-100 border-2 border-gray-600 relative overflow-hidden px-2 py-1 dark:bg-gray-700" id="editor_container">
 
             </div>
         </div>
@@ -56,13 +56,14 @@ class MyHeader extends Header {
 let editor;
 export default {
     name: "Calendar",
-    props:['url'],
+    props:['url','locale','localization'],
     data(){
         const month = new Date().getMonth();
         const year = new Date().getFullYear();
           return {
               height:'60px',
               dark:false,
+              messages:JSON.parse(this.localization),
               masks: {
                   weekdays: 'WWW',
               },
@@ -84,6 +85,18 @@ export default {
         changeCarbonToJsDate(a){
             let date=a.split("T")[0].split('-')
                return new Date(date[0],date[1]-1,date[2]);
+        },
+        watchAndChangeLocale(){
+            let element=document.querySelector('.locale-intro');
+            element.value=this.locale;
+            document.querySelector('.locale-intro').addEventListener('change',function(){
+                axios.post('/set/locale',{value:this.value}).then((res)=>{
+                    console.log(res.data);
+                    if(res.status === 200){
+                        window.location.reload(false);
+                    }
+                })
+            })
         },
       getNotes(){
           axios.post(`/user/notes`).then((res)=>{
@@ -121,6 +134,7 @@ export default {
         }
     },
     mounted(){
+        this.watchAndChangeLocale();
         let el=this;
         document.querySelector('#checkbox').addEventListener('change',function(value){
             if(this.checked){

@@ -70,16 +70,16 @@
         <div class="flex items-center justify-between w-full">
             <h1 class="text-3xl text-title dark:text-gray-100 font-bowlby add_stroke">Note Me</h1>
             <div class="flex justify-between items-center w-5/12 text-dark-black dark:text-gray-200">
-                <a href="{{route('create_note')}}" class="bg-green-400 dark:bg-about border-2 border-gray-500 dark:border-gray-200 text-white px-2 py-1 text-sm">Create New Note</a>
+                <a href="{{route('create_note')}}" class="bg-green-400 dark:bg-about border-2 border-gray-500 dark:border-gray-200 text-white px-2 py-1 text-sm">{{ __('messages.create_new_note') }}</a>
                 <div class="w-1/2 flex items-center justify-evenly">
                     <div class="flex items-center py-2">
                         <label class="flex items-center justify-center px-2 py-1">
-                            <img src="{{secure_asset('images/translate.png')}}" class="w-12 h-12" alt="translate">
-                            <select class="border-none focus:outline-none focus:ring-0 dark:bg-transparent">
-                                <option value="en"><a href="">en</a></option>
-                                <option value="mm"><a href="">mm</a></option>
-                                <option>es</option>
-                                <option>jpn</option>
+                            <img src="{{secure_asset('images/translate.png')}}" class="w-8 h-8" alt="translate">
+                            <select class="locale-intro border-none focus:outline-none focus:ring-0 dark:bg-transparent">
+                                <option value="en" class="dark:text-dark-black">en</option>
+                                <option value="mm" class="dark:text-dark-black">mm</option>
+                                <option value="es" class="dark:text-dark-black">es</option>
+                                <option value="jpn" class="dark:text-dark-black">jpn</option>
                             </select>
                         </label>
                     </div>

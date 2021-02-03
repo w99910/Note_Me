@@ -18,9 +18,13 @@ class NoteController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        App::setLocale('en');
-        $localization=[];
-        return view('dashboard',compact('localization'));
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
+        $localization=collect(__('messages' ))->toJson();
+        $locale=App::getLocale();
+
+        return view('dashboard',compact('localization','locale'));
     }
     public function create(Request $req){
 
@@ -60,7 +64,12 @@ class NoteController extends Controller
             $user = Auth::user();
             $notes = $user->notes;
             $check = $notes->contains('id', $note->id);
-          return $check?view('note',compact('note')):redirect()->route('dashboard')->withErrors(['error'=>'You are not authorized to view that note']);
+            if(\Session::has('locale')){
+                App::setLocale(\Session::get('locale'));
+            }
+            $localization=collect(__('messages' ))->toJson();
+            $locale=App::getLocale();
+          return $check?view('note',compact('note','localization','locale')):redirect()->route('dashboard')->withErrors(['error'=>'You are not authorized to view that note']);
         }
         else {
            return redirect()->route('dashboard')->withErrors(['error'=>'There is no such note']);
@@ -68,7 +77,13 @@ class NoteController extends Controller
 
     }
     public function CreateNote(){
-        return view('note')->with(['note'=>'']);
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
+        $localization=collect(__('messages' ))->toJson();
+        $locale=App::getLocale();
+        $note='';
+        return view('note',compact('note','localization','locale'));
     }
     public function notes(){
             $user=User::find(Auth::id());

@@ -4,31 +4,32 @@
             <div class="top-0 left-0 bg-transparent text-center w-1/2 flex items-center bg-yellow-300 text-white p-2"><i class="fas fa-info-circle mx-2"></i><span class="stroke-current">Click On the div to drop meshes</span></div>
         </div>
         <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white dark:bg-gray-200">
-            <span class="text-xl font-bold">Let's Rock and Roll :D</span>
+            <span class="text-xl font-bold">{{ messages.intro_login }}</span>
             <form :action="'/note_me_login'" method="post" class="w-full h-full">
                 <input type="hidden" name="_token" :value="csrf">
                 <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
-                    <div class="flex justify-start items-center w-full"><label for="email" class="w-3/12 flex">Email:</label>
+                    <div class="flex justify-start items-center w-full"><label for="email" class="w-3/12 flex">{{ messages.email }}</label>
                         <input id="email" name="email" class="text-gray-800 ml-3 focus:outline-none rounded-full py-1 px-2 w-9/12" type="text" v-model="email" required>
                     </div>
                     <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidMail"><span>Please enter valid email.</span></span>
 
                 </div>
                 <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
-                    <div class="flex justify-start items-center w-full"><label for="password" class="w-3/12 flex">Password:</label>
+                    <div class="flex justify-start items-center w-full"><label for="password" class="w-3/12 flex">{{ messages.password }}</label>
                         <input id="password" name="password" class="text-gray-800 ml-3 focus:outline-none rounded-full py-1 px-2 w-9/12" type="password" v-model="password" required>
                     </div>
                     <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidPassword" ><span>Password Field is required.</span></span>
 
                 </div>
                 <div class=" relative flex items-center justify-start w-full  h-1/4">
-                    <label for="checkbox" class="flex">Remember Me?
+                    <label for="checkbox" class="flex">{{ messages.remember_me }}
                     </label>
                     <input id="checkbox" name="remember" class="ml-3 focus:outline-none bg-gray-100" type="checkbox" v-model="remember"/>
 
                 </div>
                 <div class="w-full flex items-center justify-end mt-1 sm:mt-4">
-                    <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;" :disabled="!isDisable">Login</button>
+                    <button class="focus:outline-none text-center text-white rounded-full px-5 py-2 w-9/12 sm:w-full self-end" type="submit" style="background: #658795;" :disabled="!isDisable">
+                        {{ messages.login }}</button>
                     </div>
             </form>
         </div>
@@ -44,7 +45,7 @@ import * as CANNON from 'cannon-es';
 import { threeToCannon } from 'three-to-cannon';
 export default {
 name: "Login_Form",
-    props:['csrf','locale'],
+    props:['csrf','locale','messages'],
     data(){
         return {
             email:'',
