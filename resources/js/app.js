@@ -7,24 +7,23 @@
 require('./bootstrap');
 import gsap from "gsap/dist/gsap";
 import * as THREE from 'three';
+window.Highcharts = require('highcharts');
 window.gsap=require('gsap/dist/gsap').gsap;
 window.Vue = require('vue');
 window.THREE=THREE;
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Highcharts.setOptions({
+    chart:{
+        style:{
+            fontFamily:'poppins'
+        }
+    }
+})
+import Avataaars from 'vuejs-avataaars'
 
 Vue.component('Test', require('./components/Test.vue').default);
 Vue.component('form-component', require('./components/Form.vue').default);
 Vue.component('Note', require('./components/Note.vue').default);
-// Vue.component('guest_form', require('./components/Guest_Form.vue').default);
+Vue.component('Contact',require('./components/Contact').default);
 Vue.component('toast', require('./components/toast.vue').default);
 Vue.component('note-component',require('./components/Note_Component.vue').default);
 Vue.component('calendar',require('./components/Calendar.vue').default);
@@ -33,6 +32,9 @@ Vue.component('weather',require('./components/small-components/Weather').default
 Vue.component('trash',require('./components/small-components/trash').default);
 Vue.component('quote',require('./components/small-components/Quote').default);
 Vue.component('tiny-calendar',require('./components/small-components/tiny-calendar').default);
+Vue.component('profile',require('./components/Profile.vue').default);
+Vue.component('avatar',Avataaars);
+Vue.component('profile-card',require('./components/small-components/profile-card').default);
 import EditorJS from '@editorjs/editorjs';
 import Undo from 'editorjs-undo';
 import introJs from 'intro.js';

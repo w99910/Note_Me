@@ -111,7 +111,7 @@ export default {
             console.log(value);
         },
         deleteNote(){
-             if(confirm('Are you sure?')){
+             if(confirm(this.messages.are_you_sure)){
                  this.loading=true;
                axios.post('/delete/note',{
                    id: JSON.parse(this.note).id,
@@ -173,7 +173,7 @@ export default {
         },
         save() {
             if(this.title.trim().length ===0){
-                this.error_message='Title cannot be empty!';
+                this.error_message=this.messages.title_field_is_required;
                     return this.showToast = true;
 
             }
@@ -201,35 +201,35 @@ export default {
     },
     mounted() {
         this.watchAndChangeLocale();
+        let messages=this.messages;
         intro=new introJs().setOptions({
             tooltipClass:'customTooltip',
            steps:[
                {
-                   title:'Welcome',
-                   intro:'let me show you how to create note.'
+                   title:messages.intro_note.title,
+                   intro:messages.intro_note.step_1,
                },
                {
                  element:document.querySelector('#step-1'),
-                   intro:'Enter Title',
+                   intro:messages.intro_note.step_2,
                },
                {
                    element:document.querySelector('#step-2'),
-                   intro:'Pick any color you want.',
+                   intro:messages.intro_note.step_3,
                },
                {
                element:document.querySelector('.step-3'),
-                   title:"Now let's create some content",
-                   intro:"Left-Click here and the \'+\' button will appear. Then clicking that button will show the \'tool box\' and hover each tool to know about it. Then click any tool and try making something awesome.",
+                   intro:messages.intro_note.step_4,
                },
                {
                element:document.querySelector('#step-4'),
-                   intro:'Add Date to schedule note.',
+                   intro:messages.intro_note.step_5,
                    position:'left',
                },
                {
                element:document.querySelector('#step-5'),
-                   title:'Final Step!!',
-                   intro:"'Click the button and you've been successfully created a note.",
+                   title:messages.intro_note.final,
+                   intro:messages.intro_note.step_6,
                }
            ]
         });

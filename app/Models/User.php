@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Note;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,6 +61,14 @@ class User extends Authenticatable
     public function getTrashesAttribute()
     {
         return Note::onlyTrashed()->where('user_id',\Auth::id())->get();
+    }
+    public function getCurrentMonthNotesAttribute(): \Illuminate\Database\Eloquent\Collection
+    {
+         return $this->notes()->whereMonth('created_at',Carbon::now()->month)->get();
+    }
+    public function password_security(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(TwoFactorSecurity::class);
     }
 
 }

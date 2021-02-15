@@ -26,7 +26,7 @@ Route::get('/mailable', function () {
 });
 Route::post('/send/mail',[App\Http\Controllers\General::class,'sendMail']);
 Route::post('/set/locale',[App\Http\Controllers\General::class,'changeLocale']);
-Route::get('/dashboard',[App\Http\Controllers\NoteController::class,'index'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard',[App\Http\Controllers\NoteController::class,'index'])->middleware(['auth'])->name('dashboard');
 
 Route::post('/note/create/schedules',[App\Http\Controllers\NoteController::class,'createSchedule']);
 Route::post('/note/delete/schedules',[App\Http\Controllers\NoteController::class,'delete']);
@@ -46,7 +46,19 @@ Route::post('/trash/restore',[App\Http\Controllers\NoteController::class,'Restor
 Route::post('/trash/delete',[App\Http\Controllers\NoteController::class,'deleteTrash']);
 Route::post('/delete/all',[App\Http\Controllers\NoteController::class,'deleteAll']);
 
-Route::get('/calendar',[App\Http\Controllers\General::class,'calendar'])->middleware('auth')->name('calendar');
+Route::post('/check/2fa',[App\Http\Controllers\TwoFactorSecurityController::class,'check2fa'])->middleware('auth');
+Route::post('/enable/2fa',[App\Http\Controllers\TwoFactorSecurityController::class,'enable'])->middleware('auth');
+Route::post('/verify/2fa',[App\Http\Controllers\TwoFactorSecurityController::class,'verify2fa'])->middleware('auth');
+Route::post('/disable/2fa',[App\Http\Controllers\TwoFactorSecurityController::class,'disable2fa'])->middleware('auth');
+Route::post('/verify/2fa/auth',[App\Http\Controllers\NoteController::class,'index'])->middleware('auth')->name('verify2fa');
+
+Route::post('/change/password',[App\Http\Controllers\NoteController::class,'changePassword']);
+Route::post('/change/profile',[App\Http\Controllers\NoteController::class,'changeProfile']);
+
+Route::get('/calendar',[App\Http\Controllers\General::class,'calendar'])->middleware(['auth','2fa'])->name('calendar');
+Route::get('/profile',[App\Http\Controllers\General::class,'profile'])->middleware(['auth','2fa'])->name('profile');
+Route::get('/contact',[App\Http\Controllers\General::class,'contact'])->middleware(['auth','2fa'])->name('contact');
+Route::post('/get/notes_data',[App\Http\Controllers\NoteController::class,'notes_data'])->middleware('auth');
 Route::get('/', [App\Http\Controllers\General::class,'index'])->middleware('guest');
 
 

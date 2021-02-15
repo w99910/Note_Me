@@ -61,10 +61,10 @@ export default {
                 this.message = '';
                 console.log(this.check())
                if(!this.check())
-                   this.message +='Please fill out empty field.'
+                   this.message +=this.messages.fill_empty+' ';
                }
                if(!this.isValidEmail(this.email)){
-                   this.message+='Please fill unique email address.'
+                   this.message+=this.messages.enter_valid_email;
                }
                 this.$emit('showToast',this.message)
 

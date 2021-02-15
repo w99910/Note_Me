@@ -40,7 +40,7 @@ class SendNoti extends Command
      */
     public function handle()
     {
-        $sche=Note_Scheduler::find(1);
+        $sche=Note_Scheduler::find(14);
         $sche->updated_at=Carbon::now();
         Log::info($sche);
         $sche->save();

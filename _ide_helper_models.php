@@ -92,6 +92,30 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\TwoFactorSecurity
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $google2fa_enable
+ * @property string|null $google2fa_secret
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity whereGoogle2faEnable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity whereGoogle2faSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TwoFactorSecurity whereUserId($value)
+ */
+	class TwoFactorSecurity extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
@@ -102,12 +126,19 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection $current_month_notes
+ * @property-read mixed $trashes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
  * @property-read int|null $notes_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \App\Models\TwoFactorSecurity|null $password_security
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note_Scheduler[] $schedules
  * @property-read int|null $schedules_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $sortNoteByAsc
+ * @property-read int|null $sort_note_by_asc_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $sortNoteByDesc
+ * @property-read int|null $sort_note_by_desc_count
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()

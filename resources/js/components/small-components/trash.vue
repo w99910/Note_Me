@@ -66,7 +66,7 @@ export default {
         },
         deleteTrash(trash){
 
-            if(confirm('Are you sure?')){
+            if(confirm(this.messages.are_you_sure)){
                 this.loading=true;
                 axios.post(' /trash/delete',{
                     id:trash.id,
@@ -86,7 +86,7 @@ export default {
         },
         deleteAll(){
             if(this.trashes.length!==0){
-            if(confirm('Are you sure?')) {
+            if(confirm(this.messages.are_you_sure)) {
                 this.loading = true;
                 axios.post('/delete/all').then((res) => {
                     console.log(res);
@@ -97,7 +97,7 @@ export default {
                 })
             }
             }else{
-                this.message="You can't delete empty";
+                this.message=this.messages.delete_empty;
                 this.showToast=true;
             }
         }

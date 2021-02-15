@@ -69,7 +69,7 @@
     <div class="nav bg-white dark:bg-gray-700 border-b-2 dark:border-gray-200 border-gray-600 px-4 py-1 w-full">
         <div class="flex items-center justify-between w-full">
             <h1 class="text-3xl text-title dark:text-gray-100 font-bowlby add_stroke">Note Me</h1>
-            <div class="flex justify-between items-center w-5/12 text-dark-black dark:text-gray-200">
+            <div class="flex justify-between items-center sm:w-8/12 lg:w-5/12 text-dark-black dark:text-gray-200">
                 <a href="{{route('create_note')}}" class="bg-green-400 dark:bg-about border-2 border-gray-500 dark:border-gray-200 text-white px-2 py-1 text-sm">{{ __('messages.create_new_note') }}</a>
                 <div class="w-1/2 flex items-center justify-evenly">
                     <div class="flex items-center py-2">
@@ -90,7 +90,9 @@
                 </div>
                 <i class="far fa-bell text-dark-yellow mx-1"></i>
                 <span class="mx-2 truncate">{{Auth()->user()->name}}</span>
-                <img src="{{ Avatar::create(Auth()->user()->name)->toBase64() }}" class="w-12"/>
+                <div class="w-12 mb-2">
+                   <avatar></avatar>
+                </div>
             </div>
         </div>
     </div>
@@ -98,10 +100,10 @@
         <div class="w-20 flex dark:bg-gray-900 flex-col justify-between text-3xl items-center h-full">
             <div class="h-3/5 w-full flex flex-col justify-around items-center">
                 <a href="{{route('dashboard')}}"><i class="fas fa-sticky-note text-dark-blue"></i></a>
-                <i class="fas fa-user text-dark-purple"></i>
-                {{--                <a href="{{route('create_note')}}"><i class="fas fa-plus-circle text-3xl sm:text-5xl text-white"></i></a>--}}
-                <a href="{{route('calendar')}}"> <i class="far fa-calendar-alt text-dark-yellow"></i></a>
-                <i class="fas fa-address-card text-dark-red"></i>
+                <a href="{{route('profile')}}"><i class="fas fa-user text-dark-purple"></i></a>
+                <a href="{{route('calendar')}}"><i class="far fa-calendar-alt text-dark-yellow"></i></a>
+                <a href="{{route('contact')}}"><i class="fas fa-address-card text-dark-red"></i></a>
+
                 <i class="help cursor-pointer fas fa-exclamation-circle text-dark-yellow"></i>
             </div>
             <div class="mb-4">

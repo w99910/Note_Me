@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ secure_asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -94,7 +94,10 @@
                 </div>
                 <i class="far fa-bell text-dark-yellow mx-1"></i>
                 <span class="mx-2 truncate">{{Auth()->user()->name}}</span>
-               <img src="{{ Avatar::create(Auth()->user()->name)->toBase64() }}" class="w-12"/>
+                <div class="w-12 mb-2">
+                    <avatar></avatar>
+                </div>
+{{--               <img src="{{ Avatar::create(Auth()->user()->name)->toBase64() }}" class="w-12"/>--}}
             </div>
             </div>
         </div>
@@ -102,10 +105,11 @@
             <div class="w-20 dark:bg-gray-900 flex flex-col justify-between text-3xl items-center h-full">
                <div class="h-3/5 w-full flex flex-col justify-around items-center">
                    <a href="{{route('dashboard')}}"><i class="fas fa-sticky-note text-dark-blue"></i></a>
-                <i class="fas fa-user text-dark-purple"></i>
-{{--                <a href="{{route('create_note')}}"><i class="fas fa-plus-circle text-3xl sm:text-5xl text-white"></i></a>--}}
+                   <a href="{{route('profile')}}"><i class="fas fa-user text-dark-purple"></i></a>
+
+                   {{--                <a href="{{route('create_note')}}"><i class="fas fa-plus-circle text-3xl sm:text-5xl text-white"></i></a>--}}
                 <a href="{{route('calendar')}}"> <i class="far fa-calendar-alt text-dark-yellow"></i></a>
-                <i class="fas fa-address-card text-dark-red"></i>
+               <a href="{{route('contact')}}"><i class="fas fa-address-card text-dark-red"></i></a>
                    <i class="help cursor-pointer fas fa-exclamation-circle text-dark-yellow"></i>
                </div>
                 <div class="mb-4">

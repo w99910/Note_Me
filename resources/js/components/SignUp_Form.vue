@@ -1,28 +1,28 @@
 <template>
         <div class="w-full h-5/6 flex flex-col sm:flex-row justify-between items-center justify-center p-4 sm:px-10 sm:py-3 rounded-2xl relative">
             <div class="w-1/2 h-full relative" id="signUp-animation">
-                <div class="top-0 left-0 bg-transparent text-center w-1/2 flex items-center bg-yellow-300 text-white p-2"><i class="fas fa-info-circle mx-2"></i><span class="stroke-current">Click On the div to drop meshes</span></div>
+                <div class="top-0 absolute left-0 bg-transparent text-center w-auto flex items-center bg-yellow-300 text-white p-2"><i class="cursor-pointer fas fa-info-circle mx-2" @click="showInfo = !showInfo"></i><span class="stroke-current" v-show="showInfo">{{messages.click_on_here}}</span></div>
 
             </div>
-            <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white dark:bg-gray-200">
+            <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white border-2 border-gray-600 dark:text-gray-200 dark:border-gray-200 dark:bg-gray-700 shadow-lg">
                 <span class="text-xl font-bold">{{ messages.intro_signup }}</span>
                 <form :action="'/note_me_register'" method="post" class="w-full h-full">
                     <input type="hidden" name="_token" :value="csrf">
                     <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
                         <div class="flex justify-start items-center w-full"><label for="name" class="w-3/12 flex">{{ messages.name }}</label>
-                            <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
+                            <div class="flex w-9/12 items-center bg-white justify-center rounded-full border pr-2 border-2">
                                 <input id="name" name="name" class="border-none focus:ring-0 text-gray-800 rounded-full py-1 px-2 w-full" type="text" v-model="name">
                             </div>
                         </div>
-                        <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="nameError!==null"><span>{{nameError}}</span></span>
+                        <span class="text-red-500 w-8/12 flex self-end" v-if="nameError!==null" :class="locale==='jpn'?'text-sm':''">{{nameError}}</span>
                     </div>
                     <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
                         <div class="flex justify-start items-center w-full"><label for="email1" class="w-3/12 flex">{{ messages.email }}</label>
-                            <div class="flex w-9/12 items-center justify-center rounded-full border pr-2 border-2">
+                            <div class="flex w-9/12 items-center bg-white justify-center rounded-full border pr-2 border-2">
                                 <input id="email1" name="email1" class="text-gray-800 rounded-full focus:ring-0 border-none py-1 px-2 w-full" type="text" v-model="email" required>
                             </div>
                         </div>
-                        <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidMail"><span>Please enter valid email.</span></span>
+                        <span class="text-red-500 w-8/12 flex self-end" v-if="!isValidMail" :class="locale==='jpn'?'text-sm':''">{{ messages.enter_valid_email }}</span>
                     </div>
                     <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
                         <div class="flex justify-start items-center w-full"><label for="password1" class="w-3/12 flex">{{ messages.password }}</label>
@@ -30,7 +30,7 @@
                                 <input id="password1" name="password1" class="text-gray-800 rounded-full focus:ring-0 border-none py-1 px-2 w-full" type="password" v-model="password" required/> <i class="fas fa-eye cursor-pointer" @click="togglePass"></i>
                             </div>
                         </div>
-                        <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidPassword" ><span>Password Field is required.</span></span>
+                        <span class="text-red-500 w-8/12 flex self-end" v-if="!isValidPassword" :class="locale==='jpn'?'text-sm':''">{{ messages.password_field_is_required }}</span>
 
                     </div>
                     <div class="w-full flex items-center justify-end mt-1 sm:mt-4">
@@ -62,6 +62,7 @@ export default {
             nameError:null,
             isValidMail:true,
             isValidPassword:true,
+            showInfo:false,
         }
     },
     computed:{
@@ -72,7 +73,7 @@ export default {
     watch:{
         name() {
             if(this.HasString(this.name)){
-                this.nameError='Name field is required.'
+                this.nameError=this.messages.name_field_is_required;
             }
             else{
                 this.nameError=null;

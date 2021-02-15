@@ -46,51 +46,90 @@ name: "Note",
            })
        },
        info(){
+           let messages=this.decoded_messages;
            window.addEventListener('DOMContentLoaded',function(){
                // Scrollbar.init(document.querySelector('.note_container'))
                introHome=new introJs().setOptions({
                    tooltipClass:'customTooltip',
-                   steps:[
+                   steps:document.querySelector('.first_note')!==null?[
                        {
-                           title:'Welcome to Note Me',
-                           intro:"I hope you are doing great.Let's explore together."
+                           title:messages.intro_dashboard.title,
+                           intro:messages.intro_dashboard.step_1
                        },
                        {
                            element:document.querySelector('.weather-intro-1'),
-                           intro:'This is current weather indicator.',
+                           intro:messages.intro_dashboard.step_2,
                            position:'left'
                        },
                        {
                            element:document.querySelector('.weather-intro-2'),
-                           intro:'You can change option of the city on your own.Click here and type your city.',
+                           intro:messages.intro_dashboard.step_3,
                        },
                        {
                            element:document.querySelector('.calendar-intro'),
-                           intro:'This is a tiny calendar with your scheduled notes.Scheduled days will be highlighted.',
+                           intro:messages.intro_dashboard.step_4,
                        },
                        {
                            element:document.querySelector('.trash-intro'),
-                           intro:'This is like a recycle bin in case you might delete notes accidentally and want to restore it.',
+                           intro:messages.intro_dashboard.step_5,
                        },
                        {
                            element:document.querySelector('.quote-intro'),
-                           intro:'This is a quote to motivate you daily.',
+                           intro:messages.intro_dashboard.step_6,
                        },
                        {
                            element:document.querySelector('.checkbox'),
-                           intro:'Toggle Light Mode/Dark Mode.',
+                           intro:messages.intro_dashboard.step_7,
                        },
                        {
                            element:document.querySelector('.locale-intro'),
-                           intro:'Change Language of Website.',
+                           intro:messages.intro_dashboard.step_8,
                        },
                        {
                            element:document.querySelector('.first_note'),
-                           intro:'Click to view the note',
+                           intro:messages.intro_dashboard.step_9,
                        },
                        {
                            element:document.querySelector('.create-note-intro'),
-                           intro:"Let's create some note.",
+                           intro:messages.intro_dashboard.step_10,
+                       },
+                   ]:[
+                       {
+                           title:messages.intro_dashboard.title,
+                           intro:messages.intro_dashboard.step_1
+                       },
+                       {
+                           element:document.querySelector('.weather-intro-1'),
+                           intro:messages.intro_dashboard.step_2,
+                           position:'left'
+                       },
+                       {
+                           element:document.querySelector('.weather-intro-2'),
+                           intro:messages.intro_dashboard.step_3,
+                       },
+                       {
+                           element:document.querySelector('.calendar-intro'),
+                           intro:messages.intro_dashboard.step_4,
+                       },
+                       {
+                           element:document.querySelector('.trash-intro'),
+                           intro:messages.intro_dashboard.step_5,
+                       },
+                       {
+                           element:document.querySelector('.quote-intro'),
+                           intro:messages.intro_dashboard.step_6,
+                       },
+                       {
+                           element:document.querySelector('.checkbox'),
+                           intro:messages.intro_dashboard.step_7,
+                       },
+                       {
+                           element:document.querySelector('.locale-intro'),
+                           intro:messages.intro_dashboard.step_8,
+                       },
+                       {
+                           element:document.querySelector('.create-note-intro'),
+                           intro:messages.intro_dashboard.step_10,
                        },
                    ]
                });

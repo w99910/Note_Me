@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use App\Models\Note;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class NoteController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware(['auth','2fa']);
     }
     public function index(){
         if(\Session::has('locale')){
@@ -76,6 +77,14 @@ class NoteController extends Controller
         }
 
     }
+    public function notes_data(){
+        $user=Auth::user();
+        $notes_total=$user->notes()->count();
+        $current_notes=$user->current_month_notes->count();
+        $schedules_total=$user->schedules()->count();
+        $array=['total_notes'=>$notes_total,'total_scheduled_notes'=>$schedules_total,'current_month_notes'=>$current_notes];
+        return response()->json($array,200);
+    }
     public function CreateNote(){
         if(\Session::has('locale')){
             App::setLocale(\Session::get('locale'));
@@ -84,6 +93,36 @@ class NoteController extends Controller
         $locale=App::getLocale();
         $note='';
         return view('note',compact('note','localization','locale'));
+    }
+    public function changePassword(Request $req){
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
+               $user=Auth()->user();
+               if(Hash::check($req->password,$user->password)){
+                   $user->password=Hash::make($req->new_password);
+                   return response()->json(['message'=>__('messages.success_change'),'code'=>'success']);
+               }
+               return response()->json(['message'=>__('messages.incorrect_password'),'code'=>'error']);
+
+    }
+    public function changeProfile(Request $req)
+    {
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
+        $user=Auth()->user();
+        try {
+            if(User::where('email',$req->email)->first()!==null){
+                return response()->json(['message'=>'Email is already taken.Try another email.','code'=>'error']);
+            }
+            $user->name = $req->name;
+            $user->email = $req->email;
+            $user->save();
+        return response()->json(['user'=>$user,'message'=>'Successfully Changed','code'=>'success']);
+        } catch (\Exception $e){
+            return response()->json(['message'=>$e,'code'=>'error']);
+        }
     }
     public function notes(){
             $user=User::find(Auth::id());

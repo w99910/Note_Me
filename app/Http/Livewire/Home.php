@@ -14,16 +14,19 @@ class Home extends Component
         return view('livewire.home');
     }
     public function updatedSearch(){
-        $this->notes=Note::where('user_id',\Auth::id())->where('title','like','%'.$this->search.'%')->get();
-    }
+       if($this->notes->count()!==0) {
+           $this->notes = Note::where('user_id', \Auth::id())->where('title', 'like', '%' . $this->search . '%')->get();
+       }
+       }
     public function sort(){
-            if($this->sortyAsc){
-                $this->notes=Auth()->user()->sortNoteByAsc;
-            }
-            else {
-                $this->notes=\Auth::user()->sortNoteByDesc;
+        if($this->notes->count()!==0) {
+            if ($this->sortyAsc) {
+                $this->notes = Auth()->user()->sortNoteByAsc;
+            } else {
+                $this->notes = \Auth::user()->sortNoteByDesc;
             }
             $this->sortyAsc = !$this->sortyAsc;
+        }
     }
     public function mount(){
             $this->notes=Auth()->user()->notes;

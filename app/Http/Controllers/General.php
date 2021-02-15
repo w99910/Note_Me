@@ -27,9 +27,26 @@ class General extends Controller
         $locale=App::getLocale();
         $localization=collect(__('messages' ))->toJson();
         return view('calendar',compact('locale','localization'));
+    } public function profile(){
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
+        $locale=App::getLocale();
+        $localization=collect(__('messages' ))->toJson();
+        $user=Auth()->user();
+        return view('profile',compact('locale','localization','user'));
+    } public function contact(){
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
+        $locale=App::getLocale();
+        $localization=collect(__('messages' ))->toJson();
+        return view('contact',compact('locale','localization'));
     }
     public function SignIn(Request $req){
-
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
+        }
         $validator=\Validator::make($req->only('email','password'),[
                      'email'=>'email|required',
                     'password'=>'required',
@@ -42,7 +59,7 @@ class General extends Controller
                        return Hash::check($req['password'], $user->password) ? $this->Login($user, $req) : redirect()->back()->withErrors(['email' => 'Invalid Credentials']);
                    }
                }
-        return redirect()->back()->withErrors(['email'=>'Incorrect Email or Password.Please Try again']);
+        return redirect()->back()->withErrors(['email'=>__('messages.Incorrect_email_or_password')]);
     }
     public function Login($user,$req){
         $req->session()->regenerate();
@@ -55,12 +72,19 @@ class General extends Controller
             'email1'=>'unique:users,email|email|required',
             'password1'=>'required',
         ]);
-        if(!$validator->fails()){
-         $user=User::create(['name'=>$req->name,'email'=>$req->email1,'password'=>Hash::make($req->password1)]);
-         Auth::Login($user);
-         return redirect()->route('dashboard');
+        if(\Session::has('locale')){
+            App::setLocale(\Session::get('locale'));
         }
-        return back()->withErrors(['email'=>'Something went wrong. Please Try again.']);
+        if(!$validator->fails()){
+            $user=User::where('email',$req->email)->first();
+            return $user===null?$this->createUser($req):back()->withErrors(['email'=>__('messages.already_user')]);
+        }
+        return back()->withErrors(['email'=>__('messages.went_wrong')]);
+    }
+    public function createUser($req){
+        $user=User::create(['name'=>$req->name,'email'=>$req->email1,'password'=>Hash::make($req->password1)]);
+        Auth::Login($user);
+        return redirect()->route('dashboard');
     }
     public function changeLocale(Request $req){
         $locale=$req->value;

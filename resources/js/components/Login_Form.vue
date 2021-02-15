@@ -1,9 +1,12 @@
 <template>
     <div class="w-full h-5/6 flex flex-col sm:flex-row justify-between items-center justify-center p-4 sm:px-10 sm:py-3 relative">
         <div class="w-1/2 h-full relative" id="animation_text">
-            <div class="top-0 left-0 bg-transparent text-center w-1/2 flex items-center bg-yellow-300 text-white p-2"><i class="fas fa-info-circle mx-2"></i><span class="stroke-current">Click On the div to drop meshes</span></div>
-        </div>
-        <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white dark:bg-gray-200">
+            <div class="top-0 absolute left-0 bg-transparent text-center bg-yellow-300 text-white p-2">
+                <div class="flex items-center w-auto">
+                    <i class="fas fa-info-circle mx-2 cursor-pointer" @click="showInfo = !showInfo"></i><span class="stroke-current" v-show="showInfo">{{messages.click_on_here}}</span></div>
+            </div>
+            </div>
+        <div class="flex flex-col w-full mt-2 sm:mt-0 sm:w-5/12 text-dark-black h-full justify-center p-2 sm:p-10 rounded-2xl bg-white border-2 border-gray-600 dark:text-gray-200 dark:border-gray-200 dark:bg-gray-700 shadow-lg">
             <span class="text-xl font-bold">{{ messages.intro_login }}</span>
             <form :action="'/note_me_login'" method="post" class="w-full h-full">
                 <input type="hidden" name="_token" :value="csrf">
@@ -11,14 +14,14 @@
                     <div class="flex justify-start items-center w-full"><label for="email" class="w-3/12 flex">{{ messages.email }}</label>
                         <input id="email" name="email" class="text-gray-800 ml-3 focus:outline-none rounded-full py-1 px-2 w-9/12" type="text" v-model="email" required>
                     </div>
-                    <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidMail"><span>Please enter valid email.</span></span>
+                    <span class="text-red-500 w-8/12 flex self-end" v-if="!isValidMail" :class="locale==='jpn'?'text-sm':''"><span>{{ messages.enter_valid_email}}</span></span>
 
                 </div>
                 <div class="flex sm:mb-0 mb-1 relative justify-center flex-col items-center w-full h-1/4">
                     <div class="flex justify-start items-center w-full"><label for="password" class="w-3/12 flex">{{ messages.password }}</label>
                         <input id="password" name="password" class="text-gray-800 ml-3 focus:outline-none rounded-full py-1 px-2 w-9/12" type="password" v-model="password" required>
                     </div>
-                    <span class="text-red-500 w-full flex items-end justify-end sm:justify-center bottom-0 right-0" v-if="!isValidPassword" ><span>Password Field is required.</span></span>
+                    <span class="text-red-500 w-8/12 flex self-end" v-if="!isValidPassword" :class="locale==='jpn'?'text-sm':''"><span>{{messages.password_field_is_required}}</span></span>
 
                 </div>
                 <div class=" relative flex items-center justify-start w-full  h-1/4">
@@ -53,6 +56,7 @@ name: "Login_Form",
             isValidMail:true,
             isValidPassword:true,
             remember:false,
+            showInfo:false,
         }
     },
     computed:{
